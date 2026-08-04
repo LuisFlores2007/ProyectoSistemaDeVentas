@@ -24,4 +24,5 @@ function cambiarSeccionVista(nombreDeLaSeccion) {
 // Acción del botón salir
 function cerrarSesionUsuario() {
     alert("Cerrando sesión de Vendedor...");
+    window.location.href = "index.login.html"; // Redirige a la página de inicio de sesión
 }

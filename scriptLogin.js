@@ -10,14 +10,16 @@ function iniciarSesion() {
 
         document.getElementById("mensaje").innerHTML =
             "Bienvenido Administrador";
+            window.location.href = "IndexAdmin.html"; // Redirige a la página del administrador
 
     } 
     else if (tipoUsuario == "empleado" &&
-             usuario == "empleado" &&
+             usuario == "vendedor" &&
              contrasena == "1234") {
 
         document.getElementById("mensaje").innerHTML =
             "Bienvenido Empleado";
+            window.location.href = "indexVendedor.html"; // Redirige a la página del vendedor
 
     } 
     else {

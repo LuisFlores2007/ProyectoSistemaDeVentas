@@ -24,4 +24,5 @@ function cambiarSeccionVista(nombreDeLaSeccion) {
 // Muestra una confirmación simple cuando presiona Salir
 function cerrarSesionUsuario() {
     alert("Cerrando sesión de Administrador...");
+    window.location.href = "index.login.html"; // Redirige a la página de inicio de sesión
 }
