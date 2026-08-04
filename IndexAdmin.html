@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas - Administrador</title>
+    <link rel="stylesheet" href="styleAdmin.css">
+</head>
+<body>
+
+    <!-- Estructura principal de la pantalla -->
+    <div class="contenedor-principal">
+
+        <!-- Panel lateral con el menú -->
+        <aside class="panel-lateral">
+            
+            <!-- Encabezado con el logo y el rol del usuario -->
+            <div class="encabezado-perfil">
+                <div class="caja-logo">
+                    <span>LOGO</span>
+                </div>
+                <h2>Administrador</h2>
+            </div>
+
+            <!-- Lista de opciones del menú -->
+            <nav class="menu-navegacion">
+                <button class="boton-opcion active" onclick="cambiarSeccionVista('Registrar Producto')">
+                    Registrar producto
+                </button>
+                <button class="boton-opcion" onclick="cambiarSeccionVista('Registrar Proveedor')">
+                    Registrar Proveedor
+                </button>
+                <button class="boton-opcion" onclick="cambiarSeccionVista('Consultar Gráfica')">
+                    Consultar Grafica
+                </button>
+            </nav>
+
+        </aside>
+
+        <!-- Área de contenido de la derecha -->
+        <main class="area-contenido">
+            
+            <!-- Barra superior para acciones -->
+            <header class="barra-superior">
+                <button class="boton-salir" onclick="cerrarSesionUsuario()">Salir</button>
+            </header>
+
+            <!-- Zona donde cambia el nombre de la sección -->
+            <section class="pantalla-trabajo">
+                <h1 id="titulo-pantalla-actual">Registrar Producto</h1>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="scriptAdmin.js"></script>
+</body>
+</html>

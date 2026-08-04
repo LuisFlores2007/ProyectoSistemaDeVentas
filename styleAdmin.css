@@ -1,0 +1,144 @@
+/* Configuración básica para limpiar espacios por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fondo general de la página con tonos oscuros */
+body {
+    background-color: #0a0e17;
+    color: #ffffff;
+    height: 100vh;
+}
+
+/* Pantalla completa dividida en dos partes */
+.contenedor-principal {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Estilo del menú lateral izquierdo */
+.panel-lateral {
+    width: 280px;
+    background-color: #121824;
+    border-right: 2px solid #1b2a4a;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+}
+
+/* Caja del logo y texto de Administrador */
+.encabezado-perfil {
+    text-align: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #1b2a4a;
+    margin-bottom: 20px;
+}
+
+.caja-logo {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 15px auto;
+    background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
+}
+
+.encabezado-perfil h2 {
+    color: #00a8ff;
+    font-size: 1.3rem;
+}
+
+/* Agrupación de botones del menú */
+.menu-navegacion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Diseño de los botones */
+.boton-opcion {
+    background-color: #1b2a4a;
+    color: #e0e0e0;
+    border: 1px solid #2c3e66;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el cursor sobre los botones */
+.boton-opcion:hover {
+    background-color: #00a8ff;
+    color: #0a0e17;
+    font-weight: bold;
+    transform: translateX(4px);
+}
+
+/* Estilo para marcar el botón de la sección seleccionada */
+.boton-opcion.active {
+    background-color: #00a8ff;
+    color: #0a0e17;
+    font-weight: bold;
+}
+
+/* Contenido de la derecha */
+.area-contenido {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #0a0e17;
+}
+
+/* Barra del botón salir */
+.barra-superior {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 30px;
+}
+
+.boton-salir {
+    background-color: transparent;
+    color: #ff5252;
+    border: 2px solid #ff5252;
+    padding: 8px 22px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-salir:hover {
+    background-color: #ff5252;
+    color: #ffffff;
+}
+
+/* Centro donde se muestra el título de cada sección */
+.pantalla-trabajo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#titulo-pantalla-actual {
+    font-size: 2.2rem;
+    color: #00a8ff;
+    background-color: #121824;
+    padding: 30px 50px;
+    border-radius: 12px;
+    border: 1px solid #1b2a4a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}

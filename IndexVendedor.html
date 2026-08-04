@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas - Vendedor</title>
+    <link rel="stylesheet" href="styleVendedor.css">
+</head>
+<body>
+
+    <!-- Estructura principal -->
+    <div class="contenedor-principal">
+
+        <!-- Panel lateral del vendedor -->
+        <aside class="panel-lateral">
+            
+            <!-- Encabezado con logo y rol -->
+            <div class="encabezado-perfil">
+                <div class="caja-logo">
+                    <span>LOGO</span>
+                </div>
+                <h2>Vendedor</h2>
+            </div>
+
+            <!-- Opciones del menú del vendedor -->
+            <nav class="menu-navegacion">
+                <button class="boton-opcion active" onclick="cambiarSeccionVista('Registrar Cliente')">
+                    Registrar Cliente
+                </button>
+                <button class="boton-opcion" onclick="cambiarSeccionVista('Procesar venta')">
+                    Procesar venta
+                </button>
+                <button class="boton-opcion" onclick="cambiarSeccionVista('Consultar Factura')">
+                    Consultar Factura
+                </button>
+            </nav>
+
+        </aside>
+
+        <!-- Área de trabajo del vendedor -->
+        <main class="area-contenido">
+            
+            <!-- Botón salir en la parte superior -->
+            <header class="barra-superior">
+                <button class="boton-salir" onclick="cerrarSesionUsuario()">Salir</button>
+            </header>
+
+            <!-- Sección central que cambia -->
+            <section class="pantalla-trabajo">
+                <h1 id="titulo-pantalla-actual">Registrar Cliente</h1>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="scriptVendedor.js"></script>
+</body>
+</html>
