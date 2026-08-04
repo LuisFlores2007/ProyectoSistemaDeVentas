@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="styleLogin.css">
+</head>
+
+<body>
+
+    <div class="login">
+
+        <h2>Iniciar Sesión</h2>
+
+        <label>Tipo de usuario:</label>
+
+        <select id="tipoUsuario">
+            <option value="administrador">Administrador</option>
+            <option value="empleado">Empleado</option>
+        </select>
+
+        <label>Usuario:</label>
+
+        <input type="text" id="usuario" placeholder="Ingrese su usuario">
+
+        <label>Contraseña:</label>
+
+        <input type="password" id="contrasena" placeholder="Ingrese su contraseña">
+
+        <button onclick="iniciarSesion()">Ingresar</button>
+
+        <p id="mensaje"></p>
+
+    </div>
+
+    <script src="scriptLogin.js"></script>
+
+</body>
+</html>
