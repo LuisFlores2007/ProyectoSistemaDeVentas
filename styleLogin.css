@@ -1,66 +1,79 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #021c43;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #07111f, #12233d);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #ffffff;
 }
 
 .login {
-    background-color: white;
-    padding: 30px;
-    width: 320px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px #000000;
-    border-top: 8px solid #91c5de;
+    background-color: #0f1a2a;
+    padding: 35px;
+    width: 360px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    border: 1px solid #1a2f4c;
 }
 
 h2 {
     text-align: center;
-    color: #0d47a1;
+    color: #00d2d3;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
     margin-top: 15px;
-    color: #000000;
-    font-weight: bold;
+    color: #dce7ff;
+    font-weight: 600;
 }
 
 input, select {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 11px 12px;
+    margin-top: 6px;
     box-sizing: border-box;
-    border: 2px solid #000000;
-    border-radius: 5px;
+    border: 1px solid #203859;
+    border-radius: 8px;
+    background-color: #16263d;
+    color: #ffffff;
+}
+
+input::placeholder {
+    color: #9fb0c9;
 }
 
 input:focus, select:focus {
-    border-color: #0d0d0e;
+    border-color: #00d2d3;
     outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 210, 211, 0.2);
 }
 
 button {
     width: 100%;
     padding: 12px;
-    margin-top: 20px;
-    background-color: #000000;
+    margin-top: 22px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
-    background-color: #92969d;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 198, 255, 0.25);
 }
 
 #mensaje {
     text-align: center;
     margin-top: 15px;
-    color: #0d47a1;
+    color: #00d2d3;
     font-weight: bold;
 }

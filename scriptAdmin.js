@@ -1,28 +1,24 @@
-// Cambia el título principal cuando la persona hace clic en un botón del menú
-function cambiarSeccionVista(nombreDeLaSeccion) {
-    // Variable para guardar la etiqueta HTML del título
-    const tituloPantallaActual = document.getElementById('titulo-pantalla-actual');
-    
-    // Le asignamos el nuevo texto según el botón presionado
-    tituloPantallaActual.textContent = nombreDeLaSeccion;
+// Cambia el título principal y muestra el contenido correspondiente cuando la persona hace clic en un botón del menú
+function mostrarSeccion(nombreSeccion) {
+    const tituloPantalla = document.getElementById('tituloPantallaActual');
+    const botonesMenu = document.querySelectorAll('.botonOpcion');
+    const seccionesContenido = document.querySelectorAll('.contenidoSeccion');
 
-    // Variable con la lista de todos los botones del menú
-    const listaDeBotones = document.querySelectorAll('.boton-opcion');
-    
-    // Recorremos cada botón para resaltar únicamente el que fue presionado
-    listaDeBotones.forEach(botonActual => {
-        const textoDelBoton = botonActual.textContent.trim();
-        
-        if (textoDelBoton === nombreDeLaSeccion) {
-            botonActual.classList.add('active'); // Resalta el botón
-        } else {
-            botonActual.classList.remove('active'); // Quita el resalte
-        }
+    tituloPantalla.textContent = nombreSeccion;
+
+    botonesMenu.forEach(botonActual => {
+        const textoBoton = botonActual.textContent.trim();
+        botonActual.classList.toggle('active', textoBoton === nombreSeccion);
+    });
+
+    seccionesContenido.forEach(seccionActual => {
+        const seccionEsperada = seccionActual.dataset.seccion;
+        seccionActual.classList.toggle('active', seccionEsperada === nombreSeccion);
     });
 }
 
 // Muestra una confirmación simple cuando presiona Salir
-function cerrarSesionUsuario() {
+function cerrarSesionAdmin() {
     alert("Cerrando sesión de Administrador...");
     window.location.href = "index.login.html"; // Redirige a la página de inicio de sesión
 }

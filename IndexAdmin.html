@@ -3,51 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Ventas - Administrador</title>
+    <title>Sistema de Ventas</title>
     <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
 
     <!-- Estructura principal de la pantalla -->
-    <div class="contenedor-principal">
+    <div class="contenedorPrincipal">
 
         <!-- Panel lateral con el menú -->
-        <aside class="panel-lateral">
+        <aside class="panelLateral">
             
             <!-- Encabezado con el logo y el rol del usuario -->
-            <div class="encabezado-perfil">
-                <div class="caja-logo">
+            <div class="encabezadoPerfil">
+                <div class="cajaLogo">
                     <span>LOGO</span>
                 </div>
                 <h2>Administrador</h2>
             </div>
 
             <!-- Lista de opciones del menú -->
-            <nav class="menu-navegacion">
-                <button class="boton-opcion active" onclick="cambiarSeccionVista('Registrar Producto')">
-                    Registrar producto
+            <nav class="menuNavegacion">
+                <button class="botonOpcion" onclick="mostrarSeccion('Cargar Excel')">
+                    Cargar Excel
                 </button>
-                <button class="boton-opcion" onclick="cambiarSeccionVista('Registrar Proveedor')">
+                <button class="botonOpcion" onclick="mostrarSeccion('Control de Inventario')">
+                    Control de Inventario
+                </button>
+                <button class="botonOpcion" onclick="mostrarSeccion('Registrar Proveedor')">
                     Registrar Proveedor
                 </button>
-                <button class="boton-opcion" onclick="cambiarSeccionVista('Consultar Gráfica')">
-                    Consultar Grafica
+                <button class="botonOpcion" onclick="mostrarSeccion('Consultar Grafica')">
+                    Consultar Gráfica
                 </button>
             </nav>
 
         </aside>
 
         <!-- Área de contenido de la derecha -->
-        <main class="area-contenido">
+        <main class="areaContenido">
             
             <!-- Barra superior para acciones -->
-            <header class="barra-superior">
-                <button class="boton-salir" onclick="cerrarSesionUsuario()">Salir</button>
+            <header class="barraSuperior">
+                <button class="botonSalir" onclick="cerrarSesionAdmin()">Salir</button>
             </header>
 
             <!-- Zona donde cambia el nombre de la sección -->
-            <section class="pantalla-trabajo">
-                <h1 id="titulo-pantalla-actual">Registrar Producto</h1>
+            <section class="pantallaTrabajo">
+                <h1 id="tituloPantallaActual">Cargar Excel</h1>
+                <div class="contenidoSeccion active" data-seccion="Cargar Excel">
+                    <h2>Cargar Excel</h2>
+                    <div class="tarjeta">
+                        <p>Sube el archivo excel con toda la base de datos.</p>
+                    </div>
+                    
+                </div>
+
+                <div class="contenidoSeccion" data-seccion="Control de Inventario">
+                    <h2>Control de Inventario</h2>
+                    <p>Revisa el stock actual, agrega productos y ajusta cantidades de forma rápida.</p>
+                    <div class="tarjeta">
+                        <h3>Productos destacados</h3>
+                        <h3>Aqui se van agregar los productos</h3>
+                    </div>
+                </div>
+
+
+                <div class="contenidoSeccion" data-seccion="Registrar Proveedor">
+                    <h2>Registrar Proveedor</h2>
+                    <p>Guarda información de tus proveedores y mantén el control de abastecimiento.</p>
+                    <div class="tarjeta">
+                        <h3>Proveedor reciente</h3>
+                        <h3>Aqui se van agregar los proveedores</h3>
+                    </div>
+                </div>
+
+                <div class="contenidoSeccion" data-seccion="Consultar Grafica">
+                    <h2>Consultar Gráfica</h2>
+                    <p>Observa ventas, stock y tendencias con un resumen visual del negocio.</p>
+                    <div class="tarjeta">
+                        <h3>Aqui va la grafica en python</h3>
+                        
+                    </div>
+                </div>
             </section>
 
         </main>

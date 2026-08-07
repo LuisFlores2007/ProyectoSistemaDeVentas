@@ -13,14 +13,14 @@ body {
     height: 100vh;
 }
 
-.contenedor-principal {
+.contenedorPrincipal {
     display: flex;
     width: 100%;
     height: 100vh;
 }
 
 /* Menú lateral izquierdo */
-.panel-lateral {
+.panelLateral {
     width: 280px;
     background-color: #0f1a2a;
     border-right: 2px solid #1a2f4c;
@@ -30,14 +30,14 @@ body {
 }
 
 /* Encabezado con perfil y logo */
-.encabezado-perfil {
+.encabezadoPerfil {
     text-align: center;
     padding-bottom: 25px;
     border-bottom: 1px solid #1a2f4c;
     margin-bottom: 20px;
 }
 
-.caja-logo {
+.cajaLogo {
     width: 90px;
     height: 90px;
     margin: 0 auto 15px auto;
@@ -51,19 +51,19 @@ body {
     box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
 }
 
-.encabezado-perfil h2 {
+.encabezadoPerfil h2 {
     color: #00d2d3;
     font-size: 1.3rem;
 }
 
 /* Lista de botones */
-.menu-navegacion {
+.menuNavegacion {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.boton-opcion {
+.botonOpcion {
     background-color: #16263d;
     color: #e0e0e0;
     border: 1px solid #203859;
@@ -75,34 +75,34 @@ body {
     transition: all 0.3s ease;
 }
 
-.boton-opcion:hover {
+.botonOpcion:hover {
     background-color: #00d2d3;
     color: #0b131e;
     font-weight: bold;
     transform: translateX(4px);
 }
 
-.boton-opcion.active {
+.botonOpcion.active {
     background-color: #00d2d3;
     color: #0b131e;
     font-weight: bold;
 }
 
 /* Zona derecha de la app */
-.area-contenido {
+.areaContenido {
     flex: 1;
     display: flex;
     flex-direction: column;
     background-color: #0b131e;
 }
 
-.barra-superior {
+.barraSuperior {
     display: flex;
     justify-content: flex-end;
     padding: 20px 30px;
 }
 
-.boton-salir {
+.botonSalir {
     background-color: transparent;
     color: #ff5252;
     border: 2px solid #ff5252;
@@ -114,25 +114,82 @@ body {
     transition: all 0.3s ease;
 }
 
-.boton-salir:hover {
+.botonSalir:hover {
     background-color: #ff5252;
     color: #ffffff;
 }
 
-.pantalla-trabajo {
+.pantallaTrabajo {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    gap: 20px;
+    padding: 30px;
 }
 
-#titulo-pantalla-actual {
+#tituloPantallaActual {
     font-size: 2.2rem;
     color: #00d2d3;
     background-color: #0f1a2a;
-    padding: 30px 50px;
+    padding: 20px 40px;
     border-radius: 12px;
     border: 1px solid #1a2f4c;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.contenidoSeccion {
+    display: none;
+    width: 100%;
+    max-width: 760px;
+    background-color: #0f1a2a;
+    border: 1px solid #1a2f4c;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+}
+
+.contenidoSeccion.active {
+    display: block;
+}
+
+.contenidoSeccion h2 {
+    color: #00d2d3;
+    margin-bottom: 10px;
+}
+
+.contenidoSeccion p {
+    color: #dce7ff;
+    margin-bottom: 20px;
+}
+
+.tarjeta {
+    background: linear-gradient(135deg, #16263d, #102136);
+    border: 1px solid #203859;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.tarjeta h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.tarjeta ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.tarjeta li {
+    color: #dce7ff;
+    padding-left: 12px;
+    position: relative;
+}
+
+.tarjeta li::before {
+    content: "•";
+    color: #00d2d3;
+    position: absolute;
+    left: 0;
 }

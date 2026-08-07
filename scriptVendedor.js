@@ -1,28 +1,24 @@
-// Función para cambiar el texto en el centro al presionar cualquier opción del vendedor
-function cambiarSeccionVista(nombreDeLaSeccion) {
-    // Guardamos la etiqueta HTML en la variable
-    const tituloPantallaActual = document.getElementById('titulo-pantalla-actual');
-    
-    // Le asignamos el nuevo texto
-    tituloPantallaActual.textContent = nombreDeLaSeccion;
+// Cambia el título principal y muestra el contenido correspondiente cuando se presiona un botón del menú
+function mostrarSeccion(nombreSeccion) {
+    const tituloPantalla = document.getElementById('tituloPantallaActual');
+    const botonesMenu = document.querySelectorAll('.botonOpcion');
+    const seccionesContenido = document.querySelectorAll('.contenidoSeccion');
 
-    // Guardamos la lista con todos los botones
-    const listaDeBotones = document.querySelectorAll('.boton-opcion');
-    
-    // Recorremos los botones para cambiar el estado activo
-    listaDeBotones.forEach(botonActual => {
-        const textoDelBoton = botonActual.textContent.trim();
-        
-        if (textoDelBoton === nombreDeLaSeccion) {
-            botonActual.classList.add('active'); // Activa el color azul/celeste
-        } else {
-            botonActual.classList.remove('active'); // Desactiva el resto
-        }
+    tituloPantalla.textContent = nombreSeccion;
+
+    botonesMenu.forEach(botonActual => {
+        const textoBoton = botonActual.textContent.trim();
+        botonActual.classList.toggle('active', textoBoton === nombreSeccion);
+    });
+
+    seccionesContenido.forEach(seccionActual => {
+        const seccionEsperada = seccionActual.dataset.seccion;
+        seccionActual.classList.toggle('active', seccionEsperada === nombreSeccion);
     });
 }
 
 // Acción del botón salir
-function cerrarSesionUsuario() {
+function cerrarSesionAdmin() {
     alert("Cerrando sesión de Vendedor...");
     window.location.href = "index.login.html"; // Redirige a la página de inicio de sesión
 }

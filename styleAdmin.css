@@ -14,14 +14,14 @@ body {
 }
 
 /* Pantalla completa dividida en dos partes */
-.contenedor-principal {
+.contenedorPrincipal {
     display: flex;
     width: 100%;
     height: 100vh;
 }
 
 /* Estilo del menú lateral izquierdo */
-.panel-lateral {
+.panelLateral {
     width: 280px;
     background-color: #121824;
     border-right: 2px solid #1b2a4a;
@@ -31,14 +31,14 @@ body {
 }
 
 /* Caja del logo y texto de Administrador */
-.encabezado-perfil {
+.encabezadoPerfil {
     text-align: center;
     padding-bottom: 25px;
     border-bottom: 1px solid #1b2a4a;
     margin-bottom: 20px;
 }
 
-.caja-logo {
+.cajaLogo {
     width: 90px;
     height: 90px;
     margin: 0 auto 15px auto;
@@ -52,20 +52,20 @@ body {
     box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
 }
 
-.encabezado-perfil h2 {
+.encabezadoPerfil h2 {
     color: #00a8ff;
     font-size: 1.3rem;
 }
 
 /* Agrupación de botones del menú */
-.menu-navegacion {
+.menuNavegacion {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
 /* Diseño de los botones */
-.boton-opcion {
+.botonOpcion {
     background-color: #1b2a4a;
     color: #e0e0e0;
     border: 1px solid #2c3e66;
@@ -78,7 +78,7 @@ body {
 }
 
 /* Efecto al pasar el cursor sobre los botones */
-.boton-opcion:hover {
+.botonOpcion:hover {
     background-color: #00a8ff;
     color: #0a0e17;
     font-weight: bold;
@@ -86,14 +86,14 @@ body {
 }
 
 /* Estilo para marcar el botón de la sección seleccionada */
-.boton-opcion.active {
+.botonOpcion.active {
     background-color: #00a8ff;
     color: #0a0e17;
     font-weight: bold;
 }
 
 /* Contenido de la derecha */
-.area-contenido {
+.areaContenido {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -101,13 +101,13 @@ body {
 }
 
 /* Barra del botón salir */
-.barra-superior {
+.barraSuperior {
     display: flex;
     justify-content: flex-end;
     padding: 20px 30px;
 }
 
-.boton-salir {
+.botonSalir {
     background-color: transparent;
     color: #ff5252;
     border: 2px solid #ff5252;
@@ -119,26 +119,65 @@ body {
     transition: all 0.3s ease;
 }
 
-.boton-salir:hover {
+.botonSalir:hover {
     background-color: #ff5252;
     color: #ffffff;
 }
 
 /* Centro donde se muestra el título de cada sección */
-.pantalla-trabajo {
+.pantallaTrabajo {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    gap: 20px;
+    padding: 30px;
 }
 
-#titulo-pantalla-actual {
+#tituloPantallaActual {
     font-size: 2.2rem;
     color: #00a8ff;
     background-color: #121824;
-    padding: 30px 50px;
+    padding: 20px 40px;
     border-radius: 12px;
     border: 1px solid #1b2a4a;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
+
+.contenidoSeccion {
+    display: none;
+    width: 100%;
+    max-width: 760px;
+    background-color: #121824;
+    border: 1px solid #1b2a4a;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+}
+
+.contenidoSeccion.active {
+    display: block;
+}
+
+.contenidoSeccion h2 {
+    color: #00a8ff;
+    margin-bottom: 10px;
+}
+
+.contenidoSeccion p {
+    color: #dce7ff;
+    margin-bottom: 20px;
+}
+
+.tarjeta {
+    background: linear-gradient(135deg, #1b2a4a, #132038);
+    border: 1px solid #2c3e66;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.tarjeta h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
