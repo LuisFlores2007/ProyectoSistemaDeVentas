@@ -181,3 +181,84 @@ body {
     margin-bottom: 10px;
 }
 
+.etiquetaArchivo {
+    display: block;
+    color: #00a8ff;
+    font-size: 0.95rem;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.inputArchivo {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #2c3e66;
+    background-color: #0a0e17;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.inputArchivo:hover {
+    border-color: #00a8ff;
+    box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.15);
+}
+
+form#productos,
+form#proveedor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+form#productos label,
+form#proveedor label {
+    color: #dce7ff;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+form#productos input,
+form#proveedor input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #2c3e66;
+    background-color: #0a0e17;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+form#productos input:focus,
+form#proveedor input:focus {
+    outline: none;
+    border-color: #00a8ff;
+    box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.15);
+}
+
+form#productos input::placeholder,
+form#proveedor input::placeholder {
+    color: #7c8aa8;
+}
+
+.btn {
+    margin-top: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-red {
+    background: linear-gradient(135deg, #ff5252, #ff7b7b);
+    color: #ffffff;
+}
+
+.btn-red:hover {
+    background: linear-gradient(135deg, #ff6b6b, #ff8f8f);
+    transform: translateY(-1px);
+}
+

@@ -55,6 +55,8 @@
                     <h2>Cargar Excel</h2>
                     <div class="tarjeta">
                         <p>Sube el archivo excel con toda la base de datos.</p>
+                        <label for="datosExcel" class="etiquetaArchivo"><b>Cargar Excel:</b></label>
+                        <input type="file" id="datosExcel" accept=".xlsx" class="inputArchivo">
                     </div>
                     
                 </div>
@@ -63,8 +65,18 @@
                     <h2>Control de Inventario</h2>
                     <p>Revisa el stock actual, agrega productos y ajusta cantidades de forma rápida.</p>
                     <div class="tarjeta">
-                        <h3>Productos destacados</h3>
-                        <h3>Aqui se van agregar los productos</h3>
+                        <h3>Inventario de Productos</h3>
+                        <form id="productos" class="grid">
+                            <label for="idProducto">ID del producto</label>
+                            <input type="text" id="idProducto" placeholder="EJM: PROD-001" required>
+                            <label for="nombreProducto">Nombre del producto</label>
+                            <input type="text" id="nombreProducto" required>
+                            <label for="precioProducto">Precio del producto</label>
+                            <input type="text" id="precioProducto" required>
+                            <label for="cantidadProducto">Stock del producto</label>
+                            <input type="text" id="cantidadProducto" required>
+                            <button type="submit" class="btn btn-red">Guardar</button>
+                        </form>
                     </div>
                 </div>
 
@@ -74,7 +86,17 @@
                     <p>Guarda información de tus proveedores y mantén el control de abastecimiento.</p>
                     <div class="tarjeta">
                         <h3>Proveedor reciente</h3>
-                        <h3>Aqui se van agregar los proveedores</h3>
+                        <form id="proveedor" class="grid">
+                            <label for="nombreProveedor">Nombre del proveedor</label>
+                            <input type="text" id="nombreProveedor" required>
+                            <label for="cedula">Cédula del proveedor</label>
+                            <input type="text" id="cedula" maxlength="10" required>
+                            <label for="telefono">Teléfono del proveedor</label>
+                            <input type="text" id="telefono" placeholder="Teléfono (Inicia con 0)" maxlength="10" required>
+                            <label for="Iemail">Correo del proveedor</label>
+                            <input type="email" id="Iemail" placeholder="Correo electrónico (@)" required>
+                            <button type="submit" class="btn btn-red">Guardar</button>
+                        </form>
                     </div>
                 </div>
 
@@ -83,7 +105,6 @@
                     <p>Observa ventas, stock y tendencias con un resumen visual del negocio.</p>
                     <div class="tarjeta">
                         <h3>Aqui va la grafica en python</h3>
-                        
                     </div>
                 </div>
             </section>
