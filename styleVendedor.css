@@ -8,7 +8,7 @@
 
 /* Colores oscuros con toque celeste para la vista de Vendedor */
 body {
-    background-color: #0b131e;
+    background-color: #0a0e17;
     color: #ffffff;
     height: 100vh;
 }
@@ -22,8 +22,8 @@ body {
 /* Menú lateral izquierdo */
 .panelLateral {
     width: 280px;
-    background-color: #0f1a2a;
-    border-right: 2px solid #1a2f4c;
+    background-color: #121824;
+    border-right: 2px solid #1b2a4a;
     display: flex;
     flex-direction: column;
     padding: 20px 15px;
@@ -33,7 +33,7 @@ body {
 .encabezadoPerfil {
     text-align: center;
     padding-bottom: 25px;
-    border-bottom: 1px solid #1a2f4c;
+    border-bottom: 1px solid #1b2a4a;
     margin-bottom: 20px;
 }
 
@@ -41,18 +41,18 @@ body {
     width: 90px;
     height: 90px;
     margin: 0 auto 15px auto;
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
     border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
 }
 
 .encabezadoPerfil h2 {
-    color: #00d2d3;
+    color: #00a8ff;
     font-size: 1.3rem;
 }
 
@@ -64,9 +64,9 @@ body {
 }
 
 .botonOpcion {
-    background-color: #16263d;
+    background-color: #1b2a4a;
     color: #e0e0e0;
-    border: 1px solid #203859;
+    border: 1px solid #2c3e66;
     padding: 14px;
     border-radius: 8px;
     font-size: 0.95rem;
@@ -76,15 +76,15 @@ body {
 }
 
 .botonOpcion:hover {
-    background-color: #00d2d3;
-    color: #0b131e;
+    background-color: #00a8ff;
+    color: #0a0e17;
     font-weight: bold;
     transform: translateX(4px);
 }
 
 .botonOpcion.active {
-    background-color: #00d2d3;
-    color: #0b131e;
+    background-color: #00a8ff;
+    color: #0a0e17;
     font-weight: bold;
 }
 
@@ -93,7 +93,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #0b131e;
+    background-color: #0a0e17;
 }
 
 .barraSuperior {
@@ -130,11 +130,11 @@ body {
 
 #tituloPantallaActual {
     font-size: 2.2rem;
-    color: #00d2d3;
-    background-color: #0f1a2a;
+    color: #00a8ff;
+    background-color: #121824;
     padding: 20px 40px;
     border-radius: 12px;
-    border: 1px solid #1a2f4c;
+    border: 1px solid #1b2a4a;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -142,8 +142,8 @@ body {
     display: none;
     width: 100%;
     max-width: 760px;
-    background-color: #0f1a2a;
-    border: 1px solid #1a2f4c;
+    background-color: #121824;
+    border: 1px solid #1b2a4a;
     border-radius: 16px;
     padding: 28px;
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
@@ -154,7 +154,7 @@ body {
 }
 
 .contenidoSeccion h2 {
-    color: #00d2d3;
+    color: #00a8ff;
     margin-bottom: 10px;
 }
 
@@ -164,8 +164,8 @@ body {
 }
 
 .tarjeta {
-    background: linear-gradient(135deg, #16263d, #102136);
-    border: 1px solid #203859;
+    background: linear-gradient(135deg, #1b2a4a, #132038);
+    border: 1px solid #2c3e66;
     border-radius: 12px;
     padding: 18px;
 }
@@ -189,7 +189,7 @@ body {
 
 .tarjeta li::before {
     content: "•";
-    color: #00d2d3;
+    color: #00a8ff;
     position: absolute;
     left: 0;
 }
