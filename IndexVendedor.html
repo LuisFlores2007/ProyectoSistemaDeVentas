@@ -53,6 +53,17 @@
                     <p>Agrega nuevos clientes y organiza su información de contacto.</p>
                     <div class="tarjeta">
                         <h3>Clientes</h3>
+                        <form id="formularioCliente">
+                            <label for="nombreProveedor">Nombre</label>
+                            <input type="text" id="nombreProveedor" required>
+                            <label for="cedula">Cédula</label>
+                            <input type="text" id="cedula" maxlength="10" required>
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" id="telefono" placeholder="Teléfono (Inicia con 0)" maxlength="10" required>
+                            <label for="Iemail">Correo electrónico</label>
+                            <input type="email" id="Iemail" placeholder="Correo electrónico (@)" required>
+                            <button type="submit" class="btn btn-red">Guardar</button>
+                        </form>
                     </div>
                 </div>
 
