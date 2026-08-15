@@ -57,7 +57,8 @@
                             <label for="nombreProveedor">Nombre</label>
                             <input type="text" id="nombreProveedor" required>
                             <label for="cedula">Cédula</label>
-                            <input type="text" id="cedula" maxlength="10" required>
+                            <input type="text" id="cedula" maxlength="10" oninput="verificarCedula()" required>
+                            <small id="resultadoCedula" style="font-size: 0.85rem; margin-top: -2px; display: block;"></small>
                             <label for="telefono">Teléfono</label>
                             <input type="text" id="telefono" placeholder="Teléfono (Inicia con 0)" maxlength="10" required>
                             <label for="Iemail">Correo electrónico</label>
