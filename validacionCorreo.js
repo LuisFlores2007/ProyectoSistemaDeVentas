@@ -28,3 +28,39 @@ function validarCorreo(correo) {
 
     return true;
 }
+
+
+
+let formularioProveedor = document.getElementById("proveedor");
+
+if (formularioProveedor) {
+
+    formularioProveedor.addEventListener("submit", function(event) {
+
+        let correo = document.getElementById("Iemail").value;
+
+        if (!validarCorreo(correo)) {
+            event.preventDefault();
+            alert("Ingrese un correo electrónico válido.");
+        }
+
+    });
+}
+
+
+
+let formularioCliente = document.getElementById("formularioCliente");
+
+if (formularioCliente) {
+
+    formularioCliente.addEventListener("submit", function(event) {
+
+        let correo = document.getElementById("Iemail").value;
+
+        if (!validarCorreo(correo)) {
+            event.preventDefault();
+            alert("Ingrese un correo electrónico válido.");
+        }
+
+    });
+}
