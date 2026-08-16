@@ -90,9 +90,11 @@
                             <label for="nombreProveedor">Nombre del proveedor</label>
                             <input type="text" id="nombreProveedor" required>
                             <label for="cedula">Cédula del proveedor</label>
-                            <input type="text" id="cedula" maxlength="10" required>
+                            <input type="text" id="cedula" oninput="verificarCedula()" maxlength="10" required>
+                            <small id="resultadoCedula" style="font-size: 0.85rem; margin-top: -2px; display: block;"></small>
                             <label for="telefono">Teléfono del proveedor</label>
-                            <input type="text" id="telefono" placeholder="Teléfono (Inicia con 0)" maxlength="10" required>
+                            <input type="text" id="telefono" placeholder="Teléfono (Inicia con 0)" maxlength="10" oninput="numeroCelular()" required>
+                            <small id="mensajeTelf" style="font-size: 0.85rem; margin-top: -2px; display: block;"></small>
                             <label for="Iemail">Correo del proveedor</label>
                             <input type="email" id="Iemail" placeholder="Correo electrónico (@)" required>
                             <button type="submit" class="btn btn-red">Guardar</button>
@@ -115,5 +117,7 @@
 
     <script src="scriptAdmin.js"></script>
     <script src="validacionCorreo.js"></script>
+    <script src="validacionCedula.js"></script>
+    <script src="validacionNumeroTelefono.js"></script>
 </body>
 </html>
