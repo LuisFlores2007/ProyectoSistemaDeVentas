@@ -159,6 +159,10 @@ body {
     display: block;
 }
 
+.contenidoSeccion[data-seccion="Control de Inventario"] {
+    max-width: 1120px;
+}
+
 .contenidoSeccion h2 {
     color: #00a8ff;
     margin-bottom: 10px;
@@ -174,6 +178,22 @@ body {
     border: 1px solid #2c3e66;
     border-radius: 12px;
     padding: 18px;
+}
+
+.contenidoSeccion[data-seccion="Control de Inventario"] > p {
+    margin-bottom: 18px;
+}
+
+.contenidoSeccion[data-seccion="Control de Inventario"] .seccionProductos {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #1b2a4a;
+}
+
+.tituloProductos {
+    margin-bottom: 14px;
+    color: #ffffff;
+    font-size: 1.15rem;
 }
 
 .tarjeta h3 {
@@ -260,5 +280,108 @@ form#proveedor input::placeholder {
 .btn-red:hover {
     background: linear-gradient(135deg, #ff6b6b, #ff8f8f);
     transform: translateY(-1px);
+}
+
+.contenedorTarjetas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 420px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.encabezadosProductos,
+.tarjetaProducto {
+    display: grid;
+    grid-template-columns: 80px 72px minmax(140px, 1.4fr) minmax(110px, 1fr) 90px 90px 150px;
+    align-items: center;
+    gap: 12px;
+    min-width: 780px;
+}
+
+.encabezadosProductos {
+    padding: 0 12px;
+    color: #00a8ff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.tarjetaProducto {
+    width: 100%;
+    padding: 12px;
+    background: #0f1728;
+    border: 1px solid #2c3e66;
+    border-radius: 10px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tarjetaProducto:hover {
+    background: #14213a;
+    border-color: #00a8ff;
+}
+
+.imagenProducto {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #4364f7;
+    background: #ffffff;
+}
+
+.nombreProducto,
+.precioProducto,
+.cantidadProducto,
+.idProducto {
+    margin: 0;
+    color: #ffffff;
+}
+
+.nombreProducto {
+    min-width: 150px;
+    font-size: 1rem;
+}
+
+.tarjetaProducto .categoriaProducto {
+    width: fit-content;
+    margin: 0;
+    padding: 6px 10px;
+    color: #07111f;
+    background: #00a8ff;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.accionesProducto {
+    display: flex;
+    gap: 6px;
+}
+
+.accionesProducto .btn {
+    margin: 0;
+    padding: 8px 10px;
+    white-space: nowrap;
+}
+
+.btn-editar {
+    background: #00a8ff;
+    color: #07111f;
+}
+
+.btn-editar:hover {
+    background: #6fb1fc;
+}
+
+@media (max-width: 700px) {
+    .encabezadosProductos,
+    .tarjetaProducto {
+        grid-template-columns: 70px 64px 130px 100px 80px 80px 140px;
+        min-width: 720px;
+    }
 }
 

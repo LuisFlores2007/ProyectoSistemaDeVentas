@@ -66,9 +66,20 @@
                     <p>Revisa el stock actual, agrega productos y ajusta cantidades de forma rápida.</p>
                     <div class="tarjeta">
                         <h3>Inventario de Productos</h3>
-                        <form id="productos" class="grid">
+                        <form id="productos" class="grid" onsubmit="guardarProducto(event)">
                             <label for="idProducto">ID del producto</label>
                             <input type="text" id="idProducto" placeholder="EJM: PROD-001" required>
+                            <!--Menu de las categorias-->
+                            <label for="categoriaProducto">Categoría del producto</label>
+                            <select id="categoriaProducto" class="inputFormulario" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="abarrotes">Abarrotes</option>
+                                <option value="bebidas">Bebidas</option>
+                                <option value="congelados">Frescos y Congelados</option>
+                                <option value="Hogar">Hogar y cuidado personal</option>
+                                <option value="Snacks">Alimentos</option>
+                                <option value="Juguetes">Snacks</option>
+                            </select>
                             <label for="idImagenProducto">Imagen del producto</label>
                             <input type="file" id="idImagenProducto" accept="image/*" required>
                             <label for="nombreProducto">Nombre del producto</label>
@@ -79,6 +90,15 @@
                             <input type="text" id="cantidadProducto" required>
                             <button type="submit" class="btn btn-red">Guardar</button>
                         </form>
+                    </div>
+                    <!--Scroll para ver las tarjetas-->
+                    <div class="seccionProductos">
+                        <h3 class="tituloProductos">Productos Recientes</h3>
+                        <!-- Contedor de las tarejetas -->   
+                        <div class="contenedorTarjetas" id="contenedorTarjetas">
+                            <p id="mensajeVacio" class="textoVacio">No hay productos registrados.</p>
+                        </div>
+                            
                     </div>
                 </div>
 
