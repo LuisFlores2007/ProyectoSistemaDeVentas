@@ -1,18 +1,18 @@
-// Guarda todos los productos mientras la pagina esta abierta
+// Conserva los productos registrados mientras la pagina esta abierta
 const informacionMatriz = [];
 
-// Indica que producto se esta editando y -1 significa que es un producto nuevo
+// Guarda la posicion del producto que se esta editando
 let indiceProductoEditando = -1;
 
-// Lee el formulario y guarda un producto nuevo o actualiza uno existente
+// Lee el formulario y agrega un producto o actualiza uno existente
 function guardarProducto(evento) {
     // Evita que el formulario recargue la pagina
     evento.preventDefault();
 
-    // Obtiene la imagen seleccionada por el usuario
+    // Obtiene la imagen seleccionada por la persona
     const archivoImagen = document.getElementById("idImagenProducto").files[0];
 
-    // Crea una fila con los datos en el mismo orden de los encabezados
+    // Reune los datos en el mismo orden que usa la matriz
     const nuevaFila = [
         document.getElementById("idProducto").value,
         document.getElementById("categoriaProducto").value,
@@ -22,27 +22,28 @@ function guardarProducto(evento) {
         document.getElementById("cantidadProducto").value
     ];
 
-    // Si hay un indice reemplaza el producto y si no agrega uno nuevo
+    // Reemplaza la fila cuando se esta editando un producto
     if (indiceProductoEditando >= 0) {
         informacionMatriz[indiceProductoEditando] = nuevaFila;
         indiceProductoEditando = -1;
         document.querySelector('#productos button[type="submit"]').textContent = "Guardar";
         document.getElementById("idImagenProducto").required = true;
+    // Agrega una fila nueva cuando no hay una edicion activa
     } else {
         informacionMatriz.push(nuevaFila);
     }
 
-    // Actualiza la lista visible y limpia el formulario
+    // Redibuja la matriz y limpia el formulario
     mostrarInformacionMatriz();
     document.getElementById("productos").reset();
 }
 
-// Dibuja los encabezados y todas las filas dentro del contenedor de productos
+// Dibuja los encabezados y las filas visibles de productos
 function mostrarInformacionMatriz() {
-    // Busca el elemento HTML donde se mostraran los productos
+    // Busca el contenedor donde aparecera la matriz
     let contendedor = document.getElementById("contenedorTarjetas");
 
-    // Borra la lista anterior para evitar productos repetidos
+    // Reemplaza el contenido anterior para evitar filas repetidas
     contendedor.innerHTML = `
         <div class="encabezadosProductos">
             <span>ID</span>
@@ -54,9 +55,9 @@ function mostrarInformacionMatriz() {
             <span>Acciones</span>
         </div>
     `;
-    // Recorre la matriz y crea una fila visual por cada producto
+    // Crea una fila visual por cada producto registrado
     for (let i = 0; i < informacionMatriz.length; i = i + 1) {
-        // Obtiene los datos del producto actual
+        // Separa los datos del producto para mostrar cada columna
         let filaActual = informacionMatriz[i];
         let idProducto = filaActual[0];
         let categoriaProducto = filaActual[1];
@@ -64,7 +65,7 @@ function mostrarInformacionMatriz() {
         let nombreProducto = filaActual[3];
         let precioProducto = filaActual[4];
         let cantidadProducto = filaActual[5];
-        // Inserta la informacion y los botones en el HTML
+        // Inserta la informacion y las acciones en el HTML
         contendedor.innerHTML += `
         <div class="tarjetaProducto">
             <span class="idProducto">${idProducto}</span>
@@ -82,7 +83,7 @@ function mostrarInformacionMatriz() {
     }
 }
 
-// Busca un producto por su ID lo elimina y vuelve a dibujar la lista
+// Busca un producto por su identificador y vuelve a dibujar la matriz
 function eliminarProducto(idProducto) {
     const indiceProducto = informacionMatriz.findIndex(fila => fila[0] === idProducto);
     if (indiceProducto !== -1) {
@@ -91,7 +92,7 @@ function eliminarProducto(idProducto) {
     }
 }
 
-// Carga los datos del producto en el formulario para poder modificarlos
+// Carga los datos de un producto en el formulario para editarlo
 function editarProducto(indiceProducto) {
     const producto = informacionMatriz[indiceProducto];
     indiceProductoEditando = indiceProducto;
@@ -106,5 +107,5 @@ function editarProducto(indiceProducto) {
     document.getElementById("productos").scrollIntoView({ behavior: "smooth" });
 }
 
-// Muestra los encabezados aunque todavia no existan productos
+// Muestra los encabezados aunque aun no existan productos
 mostrarInformacionMatriz();

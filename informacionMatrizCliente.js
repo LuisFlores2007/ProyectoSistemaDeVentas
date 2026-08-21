@@ -1,11 +1,15 @@
-// Guarda todos los clientes mientras la pagina esta abierta
+// Conserva los clientes registrados mientras la pagina esta abierta
 const informacionMatrizClientes = [];
 
+// Guarda la posicion del cliente que se esta editando
 let indiceClienteEditando = -1;
 
+// Lee el formulario y agrega un cliente o actualiza uno existente
 function guardarCliente(evento) {
+	// Evita que el formulario recargue la pagina
 	evento.preventDefault();
 
+	// Reune los datos en el mismo orden que usa la matriz
 	const nuevaFila = [
 		document.getElementById("nombreProveedor").value,
 		document.getElementById("cedula").value,
@@ -13,21 +17,27 @@ function guardarCliente(evento) {
 		document.getElementById("Iemail").value
 	];
 
+	// Reemplaza la fila cuando se esta editando un cliente
 	if (indiceClienteEditando >= 0) {
 		informacionMatrizClientes[indiceClienteEditando] = nuevaFila;
 		indiceClienteEditando = -1;
 		document.querySelector('#formularioCliente button[type="submit"]').textContent = "Guardar";
+	// Agrega una fila nueva cuando no hay una edicion activa
 	} else {
 		informacionMatrizClientes.push(nuevaFila);
 	}
 
+	// Redibuja la matriz y limpia el formulario
 	mostrarInformacionMatrizClientes();
 	document.getElementById("formularioCliente").reset();
 }
 
+// Dibuja los encabezados y las filas visibles de clientes
 function mostrarInformacionMatrizClientes() {
+	// Busca el contenedor donde aparecera la matriz
 	const contenedor = document.getElementById("contenedorClientes");
 
+	// Reemplaza el contenido anterior para evitar filas repetidas
 	contenedor.innerHTML = `
 		<div class="encabezadosClientes">
 			<span>Nombre</span>
@@ -38,6 +48,7 @@ function mostrarInformacionMatrizClientes() {
 		</div>
 	`;
 
+	// Crea una fila visual por cada cliente registrado
 	for (let i = 0; i < informacionMatrizClientes.length; i = i + 1) {
 		const filaActual = informacionMatrizClientes[i];
 		contenedor.innerHTML += `
@@ -55,11 +66,13 @@ function mostrarInformacionMatrizClientes() {
 	}
 }
 
+// Elimina un cliente por su posicion y actualiza la matriz
 function eliminarCliente(indiceCliente) {
 	informacionMatrizClientes.splice(indiceCliente, 1);
 	mostrarInformacionMatrizClientes();
 }
 
+// Carga los datos de un cliente en el formulario para editarlo
 function editarCliente(indiceCliente) {
 	const cliente = informacionMatrizClientes[indiceCliente];
 	indiceClienteEditando = indiceCliente;
@@ -72,4 +85,5 @@ function editarCliente(indiceCliente) {
 	document.getElementById("formularioCliente").scrollIntoView({ behavior: "smooth" });
 }
 
+// Muestra los encabezados aunque aun no existan clientes
 mostrarInformacionMatrizClientes();

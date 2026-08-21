@@ -1,12 +1,15 @@
-// Guarda todos los proveedores mientras la pagina esta abierta
+// Conserva los proveedores registrados mientras la pagina esta abierta
 const informacionMatrizProveedores = [];
 
+// Guarda la posicion del proveedor que se esta editando
 let indiceProveedorEditando = -1;
 
-// Lee el formulario y guarda un proveedor nuevo o actualiza uno existente
+// Lee el formulario y agrega un proveedor o actualiza uno existente
 function guardarProveedor(evento) {
+	// Evita que el formulario recargue la pagina
 	evento.preventDefault();
 
+	// Reune los datos en el mismo orden que usa la matriz
 	const nuevaFila = [
 		document.getElementById("nombreProveedor").value,
 		document.getElementById("cedula").value,
@@ -17,22 +20,27 @@ function guardarProveedor(evento) {
 		document.getElementById("numeroCuenta").value
 	];
 
+	// Reemplaza la fila cuando se esta editando un proveedor
 	if (indiceProveedorEditando >= 0) {
 		informacionMatrizProveedores[indiceProveedorEditando] = nuevaFila;
 		indiceProveedorEditando = -1;
 		document.querySelector('#proveedor button[type="submit"]').textContent = "Guardar";
+	// Agrega una fila nueva cuando no hay una edicion activa
 	} else {
 		informacionMatrizProveedores.push(nuevaFila);
 	}
 
+	// Redibuja la matriz y limpia el formulario
 	mostrarInformacionMatrizProveedores();
 	document.getElementById("proveedor").reset();
 }
 
-// Dibuja los encabezados y todas las filas dentro del contenedor de proveedores
+// Dibuja los encabezados y las filas visibles de proveedores
 function mostrarInformacionMatrizProveedores() {
+	// Busca el contenedor donde aparecera la matriz
 	const contenedor = document.getElementById("contenedorProveedores");
 
+	// Reemplaza el contenido anterior para evitar filas repetidas
 	contenedor.innerHTML = `
 		<div class="encabezadosProveedores">
 			<span>Nombre</span>
@@ -46,6 +54,7 @@ function mostrarInformacionMatrizProveedores() {
 		</div>
 	`;
 
+	// Crea una fila visual por cada proveedor registrado
 	for (let i = 0; i < informacionMatrizProveedores.length; i = i + 1) {
 		const filaActual = informacionMatrizProveedores[i];
 		contenedor.innerHTML += `
@@ -66,11 +75,13 @@ function mostrarInformacionMatrizProveedores() {
 	}
 }
 
+// Elimina un proveedor por su posicion y actualiza la matriz
 function eliminarProveedor(indiceProveedor) {
 	informacionMatrizProveedores.splice(indiceProveedor, 1);
 	mostrarInformacionMatrizProveedores();
 }
 
+// Carga los datos de un proveedor en el formulario para editarlo
 function editarProveedor(indiceProveedor) {
 	const proveedor = informacionMatrizProveedores[indiceProveedor];
 	indiceProveedorEditando = indiceProveedor;
@@ -86,4 +97,5 @@ function editarProveedor(indiceProveedor) {
 	document.getElementById("proveedor").scrollIntoView({ behavior: "smooth" });
 }
 
+// Muestra los encabezados aunque aun no existan proveedores
 mostrarInformacionMatrizProveedores();
