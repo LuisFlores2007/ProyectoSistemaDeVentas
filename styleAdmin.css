@@ -163,6 +163,10 @@ body {
     max-width: 1120px;
 }
 
+.contenidoSeccion[data-seccion="Registrar Proveedor"] {
+    max-width: 1120px;
+}
+
 .contenidoSeccion h2 {
     color: #00a8ff;
     margin-bottom: 10px;
@@ -232,6 +236,25 @@ form#proveedor {
     margin-top: 12px;
 }
 
+form#proveedor {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.8fr) minmax(220px, 1.4fr);
+    align-items: center;
+    column-gap: 18px;
+    row-gap: 10px;
+}
+
+form#proveedor small {
+    grid-column: 2;
+    margin-top: -5px !important;
+}
+
+form#proveedor button[type="submit"] {
+    grid-column: 2;
+    justify-self: start;
+    min-width: 130px;
+}
+
 form#productos label,
 form#proveedor label {
     color: #dce7ff;
@@ -240,7 +263,9 @@ form#proveedor label {
 }
 
 form#productos input,
-form#proveedor input {
+form#proveedor input,
+form#productos select,
+form#proveedor select {
     width: 100%;
     padding: 10px 12px;
     border-radius: 8px;
@@ -251,7 +276,9 @@ form#proveedor input {
 }
 
 form#productos input:focus,
-form#proveedor input:focus {
+form#proveedor input:focus,
+form#productos select:focus,
+form#proveedor select:focus {
     outline: none;
     border-color: #00a8ff;
     box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.15);
@@ -298,6 +325,38 @@ form#proveedor input::placeholder {
     align-items: center;
     gap: 12px;
     min-width: 780px;
+}
+
+.encabezadosProveedores,
+.tarjetaProveedor {
+    display: grid;
+    grid-template-columns: minmax(140px, 1.2fr) 110px minmax(150px, 1.3fr) minmax(150px, 1.4fr) 110px minmax(180px, 1.5fr) 140px 150px;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.encabezadosProveedores {
+    padding: 10px 14px;
+    color: #00a8ff;
+    font-weight: bold;
+}
+
+.tarjetaProveedor {
+    padding: 12px 14px;
+    background-color: #121824;
+    border: 1px solid #2c3e66;
+    border-radius: 8px;
+}
+
+.accionesProveedor {
+    display: flex;
+    gap: 8px;
+}
+
+.tarjetaProveedor span {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .encabezadosProductos {
@@ -378,10 +437,33 @@ form#proveedor input::placeholder {
 }
 
 @media (max-width: 700px) {
+    .contenidoSeccion[data-seccion="Registrar Proveedor"] {
+        padding: 18px;
+    }
+
+    form#proveedor {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    form#proveedor small,
+    form#proveedor button[type="submit"] {
+        width: 100%;
+        grid-column: auto;
+    }
+
     .encabezadosProductos,
     .tarjetaProducto {
         grid-template-columns: 70px 64px 130px 100px 80px 80px 140px;
         min-width: 720px;
+    }
+
+    .encabezadosProveedores,
+    .tarjetaProveedor {
+        grid-template-columns: 140px 110px 150px 180px 110px 190px 140px 140px;
+        min-width: 1160px;
     }
 }
 

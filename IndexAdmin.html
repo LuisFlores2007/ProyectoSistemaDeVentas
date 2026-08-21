@@ -72,7 +72,7 @@
                             <!--Menu de las categorias-->
                             <label for="categoriaProducto">Categoría del producto</label>
                             <select id="categoriaProducto" class="inputFormulario" required>
-                                <option value="">Seleccione una categoría</option>
+                                <option value="" disabled selected>Seleccione una categoría</option>
                                 <option value="abarrotes">Abarrotes</option>
                                 <option value="bebidas">Bebidas</option>
                                 <option value="congelados">Frescos y Congelados</option>
@@ -107,20 +107,40 @@
                     <h2>Registrar Proveedor</h2>
                     <p>Guarda información de tus proveedores y mantén el control de abastecimiento.</p>
                     <div class="tarjeta">
-                        <h3>Proveedor reciente</h3>
-                        <form id="proveedor" class="grid">
+                        <h3>Proveedor</h3>
+                        <form id="proveedor" class="grid" onsubmit="guardarProveedor(event)">
                             <label for="nombreProveedor">Nombre del proveedor</label>
                             <input type="text" id="nombreProveedor" required>
                             <label for="cedula">Cédula del proveedor</label>
                             <input type="text" id="cedula" oninput="verificarCedula()" maxlength="10" required>
                             <small id="resultadoCedula" style="font-size: 0.85rem; margin-top: -2px; display: block;"></small>
+                            <label for="razonSocial">Razón social</label>
+                            <input type="text" id="razonSocial" required>
+                            <label for="tipoProductoProveedor">Tipo de producto</label>
+                            <select id="tipoProductoProveedor" class="inputFormulario" required>
+                                <option value="" disabled selected>Seleccione una categoría</option>
+                                <option value="Abarrotes">Abarrotes</option>
+                                <option value="Bebidas">Bebidas</option>
+                                <option value="Frescos y congelados">Frescos y congelados</option>
+                                <option value="Hogar y cuidado personal">Hogar y cuidado personal</option>
+                                <option value="Alimentos">Alimentos</option>
+                                <option value="Snacks">Snacks</option>
+                            </select>
                             <label for="telefono">Teléfono del proveedor</label>
                             <input type="text" id="telefono" placeholder="Teléfono (Inicia con 0)" maxlength="10" oninput="numeroCelular()" required>
                             <small id="mensajeTelf" style="font-size: 0.85rem; margin-top: -2px; display: block;"></small>
                             <label for="Iemail">Correo del proveedor</label>
                             <input type="email" id="Iemail" placeholder="Correo electrónico (@)" required>
+                            <label for="numeroCuenta">Número de cuenta</label>
+                            <input type="text" id="numeroCuenta" required>
                             <button type="submit" class="btn btn-red">Guardar</button>
                         </form>
+                    </div>
+                    <div class="seccionProductos">
+                        <h3 class="tituloProductos">Proveedores registrados</h3>
+                        <div class="contenedorTarjetas" id="contenedorProveedores">
+                            <p id="mensajeVacioProveedores" class="textoVacio">No hay proveedores registrados.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -142,5 +162,6 @@
     <script src="validacionCedula.js"></script>
     <script src="validacionNumeroTelefono.js"></script>
     <script src="InformacionMatrizProductos.js"></script>
+    <script src="informacionMatrizProveedor.js"></script>
 </body>
 </html>
