@@ -53,7 +53,7 @@
                     <p>Agrega nuevos clientes y organiza su información de contacto.</p>
                     <div class="tarjeta">
                         <h3>Clientes</h3>
-                        <form id="formularioCliente">
+                        <form id="formularioCliente" onsubmit="guardarCliente(event)">
                             <label for="nombreProveedor">Nombre</label>
                             <input type="text" id="nombreProveedor" required>
                             <label for="cedula">Cédula</label>
@@ -66,6 +66,12 @@
                             <input type="email" id="Iemail" placeholder="Correo electrónico (@)" required>
                             <button type="submit" class="btn btn-red">Guardar</button>
                         </form>
+                    </div>
+                    <div class="seccionClientes">
+                        <h3 class="tituloClientes">Clientes registrados</h3>
+                        <div class="contenedorClientes" id="contenedorClientes">
+                            <p class="textoVacio">No hay clientes registrados.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -93,5 +99,6 @@
     <script src="validacionCorreo.js"></script>
     <script src="validacionCedula.js"></script>
     <script src="validacionNumeroTelefono.js"></script>
+    <script src="informacionMatrizCliente.js"></script>
 </body>
 </html>

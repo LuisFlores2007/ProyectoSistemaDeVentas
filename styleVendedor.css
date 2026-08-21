@@ -153,6 +153,10 @@ body {
     display: block;
 }
 
+.contenidoSeccion[data-seccion="Registrar Cliente"] {
+    max-width: 1120px;
+}
+
 .contenidoSeccion h2 {
     color: #00a8ff;
     margin-bottom: 10px;
@@ -195,10 +199,23 @@ body {
 }
 
 form#formularioCliente {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: minmax(140px, 0.8fr) minmax(240px, 1.4fr);
+    align-items: center;
+    column-gap: 18px;
+    row-gap: 10px;
     margin-top: 12px;
+}
+
+form#formularioCliente small {
+    grid-column: 2;
+    margin-top: -5px !important;
+}
+
+form#formularioCliente button[type="submit"] {
+    grid-column: 2;
+    justify-self: start;
+    min-width: 130px;
 }
 
 form#formularioCliente label {
@@ -227,6 +244,65 @@ form#formularioCliente input::placeholder {
     color: #7c8aa8;
 }
 
+.seccionClientes {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #1b2a4a;
+}
+
+.tituloClientes {
+    color: #ffffff;
+    margin-bottom: 14px;
+    font-size: 1.15rem;
+}
+
+.contenedorClientes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 420px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.encabezadosClientes,
+.tarjetaCliente {
+    display: grid;
+    grid-template-columns: minmax(140px, 1.4fr) 120px 120px minmax(180px, 1.5fr) 150px;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.encabezadosClientes {
+    padding: 10px 14px;
+    color: #00a8ff;
+    font-weight: bold;
+}
+
+.tarjetaCliente {
+    padding: 12px 14px;
+    background-color: #121824;
+    border: 1px solid #2c3e66;
+    border-radius: 8px;
+}
+
+.tarjetaCliente span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.accionesCliente {
+    display: flex;
+    gap: 8px;
+}
+
+.accionesCliente .btn {
+    margin: 0;
+    padding: 8px 10px;
+    white-space: nowrap;
+}
+
 .btn {
     margin-top: 8px;
     padding: 10px 16px;
@@ -245,4 +321,38 @@ form#formularioCliente input::placeholder {
 .btn-red:hover {
     background: linear-gradient(135deg, #ff6b6b, #ff8f8f);
     transform: translateY(-1px);
+}
+
+.btn-editar {
+    background: #00a8ff;
+    color: #07111f;
+}
+
+.btn-editar:hover {
+    background: #6fb1fc;
+}
+
+@media (max-width: 700px) {
+    .contenidoSeccion[data-seccion="Registrar Cliente"] {
+        padding: 18px;
+    }
+
+    form#formularioCliente {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    form#formularioCliente small,
+    form#formularioCliente button[type="submit"] {
+        width: 100%;
+        grid-column: auto;
+    }
+
+    .encabezadosClientes,
+    .tarjetaCliente {
+        grid-template-columns: 140px 110px 110px 190px 140px;
+        min-width: 730px;
+    }
 }
