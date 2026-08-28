@@ -1,7 +1,14 @@
-// Revisa las partes basicas que debe tener una direccion de correo
+// ==========================================
+// VALIDACIÓN DE CORREO ELECTRÓNICO
+// ==========================================
+
+// Revisa las partes básicas que debe tener una dirección de correo
 function validarCorreo(correo) {
 
-    // Rechaza un correo que no tenga contenido
+    // Quita espacios al inicio y al final
+    correo = correo.trim();
+
+    // Rechaza un correo vacío
     if (correo === "") {
         return false;
     }
@@ -9,23 +16,28 @@ function validarCorreo(correo) {
     // Separa el correo en usuario y dominio
     let partes = correo.split("@");
 
-    // Un correo valido debe tener un solo arroba
+    // Debe existir un solo arroba
     if (partes.length !== 2) {
         return false;
     }
 
-    // Verifica que exista un usuario antes del arroba
+    // Debe existir texto antes del @
     if (partes[0] === "") {
         return false;
     }
 
-    // Verifica que exista un dominio despues del arroba
+    // Debe existir texto después del @
     if (partes[1] === "") {
         return false;
     }
 
-    // El dominio debe tener un punto interno
+    // El dominio debe tener un punto
     if (!partes[1].includes(".")) {
+        return false;
+    }
+
+    // El dominio no puede comenzar con punto
+    if (partes[1].startsWith(".")) {
         return false;
     }
 
@@ -34,43 +46,112 @@ function validarCorreo(correo) {
         return false;
     }
 
-    // Confirma que el correo paso todas las revisiones
     return true;
 }
-// Busca el formulario de proveedores si existe en la pagina actual
+
+// ==========================================
+// VALIDACIÓN MIENTRAS SE ESCRIBE
+// ==========================================
+
+function validarCorreoEnTiempoReal() {
+
+    // Busca el campo de correo
+    let campoCorreo = document.getElementById("Iemail");
+
+    // Busca el lugar donde aparecerá el mensaje
+    let mensajeCorreo = document.getElementById("mensajeCorreo");
+
+    // Verifica que los elementos existan
+    if (!campoCorreo || !mensajeCorreo) {
+        return;
+    }
+
+    // Obtiene el correo escrito
+    let correo = campoCorreo.value.trim();
+
+    // Si está vacío, no muestra ningún mensaje
+    if (correo === "") {
+        mensajeCorreo.innerHTML = "";
+        return;
+    }
+
+    // Si el correo NO es válido
+    if (!validarCorreo(correo)) {
+
+        mensajeCorreo.innerHTML = "Correo electrónico no válido";
+        mensajeCorreo.style.color = "#ff5252";
+
+        return;
+    }
+
+    // Si el correo SÍ es válido
+    mensajeCorreo.innerHTML = "✓ Correo electrónico válido";
+    mensajeCorreo.style.color = "#00a8ff";
+}
+
+// ==========================================
+// VALIDACIÓN DEL FORMULARIO DE PROVEEDOR
+// ==========================================
+
 let formularioProveedor = document.getElementById("proveedor");
 
 if (formularioProveedor) {
 
-    // Revisa el correo antes de permitir el envio del formulario
     formularioProveedor.addEventListener("submit", function(event) {
 
-        // Obtiene el correo escrito por la persona
-        let correo = document.getElementById("Iemail").value;
+        let campoCorreo = document.getElementById("Iemail");
 
+        if (!campoCorreo) {
+            return;
+        }
+
+        let correo = campoCorreo.value.trim();
+
+        // Si el correo no es válido, evita guardar
         if (!validarCorreo(correo)) {
-            // Detiene el envio cuando el correo no es valido
+
             event.preventDefault();
-            alert("Ingrese un correo electrónico válido.");
+
+            let mensajeCorreo = document.getElementById("mensajeCorreo");
+
+            if (mensajeCorreo) {
+                mensajeCorreo.innerHTML = "Correo electrónico no válido";
+                mensajeCorreo.style.color = "#ff5252";
+            }
         }
 
     });
 }
-// Busca el formulario de clientes si existe en la pagina actual
+
+// ==========================================
+// VALIDACIÓN DEL FORMULARIO DE CLIENTE
+// ==========================================
+
 let formularioCliente = document.getElementById("formularioCliente");
 
 if (formularioCliente) {
 
-    // Revisa el correo antes de permitir el envio del formulario
     formularioCliente.addEventListener("submit", function(event) {
 
-        // Obtiene el correo escrito por la persona
-        let correo = document.getElementById("Iemail").value;
+        let campoCorreo = document.getElementById("Iemail");
 
+        if (!campoCorreo) {
+            return;
+        }
+
+        let correo = campoCorreo.value.trim();
+
+        // Si el correo no es válido, evita guardar
         if (!validarCorreo(correo)) {
-            // Detiene el envio cuando el correo no es valido
+
             event.preventDefault();
-            alert("Ingrese un correo electrónico válido.");
+
+            let mensajeCorreo = document.getElementById("mensajeCorreo");
+
+            if (mensajeCorreo) {
+                mensajeCorreo.innerHTML = "Correo electrónico no válido";
+                mensajeCorreo.style.color = "#ff5252";
+            }
         }
 
     });
