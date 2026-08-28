@@ -197,6 +197,16 @@ function confirmarVenta() {
 
     localStorage.setItem("ventasSistemaVentas", JSON.stringify(ventasGuardadas));
     guardarInventario(inventario);
+    // Enviar factura automáticamente al correo del cliente
+enviarFacturaPorCorreo(
+    cliente,
+    numeroVenta,
+    fecha,
+    carritoVenta,
+    subtotal,
+    descuento,
+    total
+);
     alert(`Venta confirmada por $${total.toFixed(2)}`);
     carritoVenta = [];
     mostrarCarrito();
