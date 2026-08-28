@@ -100,7 +100,7 @@ function cargarInventarioCsv(evento) {
         mostrarInformacionMatriz();
         alert(`Inventario cargado correctamente: ${inventarioCsv.length} producto(s).`);
     };
-    lector.onerror = () => alert("No se pudo leer el archivo CSV.");
+    lector.onerror = () => alert("No se pudo leer el archivo Excel.");
     lector.readAsText(archivoCsv);
 }
 

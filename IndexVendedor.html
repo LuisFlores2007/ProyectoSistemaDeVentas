@@ -78,11 +78,35 @@
 
                 <div class="contenidoSeccion" data-seccion="Procesar venta">
                     <h2>Procesar venta</h2>
-                    <p>Registra ventas rápidas y genera el resumen del pedido.</p>
-                    <div class="tarjeta">
-                        <h3>Inventario Actual</h3>
-                        <div class="contenedorInventario" id="contenedorInventario">
-                            <p class="textoVacio">No hay productos disponibles en el inventario.</p>
+                    <p>Selecciona un cliente agrega productos y confirma la compra</p>
+                    <div class="ventaLayout">
+                        <div class="panelProductos">
+                            <div class="tarjeta">
+                                <h3>Inventario Actual</h3>
+                                <div class="contenedorInventario" id="contenedorInventario">
+                                    <p class="textoVacio">No hay productos disponibles en el inventario.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panelResumen">
+                            <div class="tarjeta datosVenta">
+                                <h3>Datos de la venta</h3>
+                                <label for="clienteVenta">Selecciona el cliente</label>
+                                <select id="clienteVenta" class="selectorVenta">
+                                    <option value="">Selecciona un cliente</option>
+                                </select>
+                            </div>
+                            <div class="tarjeta resumenVenta">
+                                <h3>Resumen de compra</h3>
+                                <div id="carritoVenta">
+                                    <p class="textoVacio">No hay productos seleccionados</p>
+                                </div>
+                                <p>Subtotal <strong id="subtotalVenta">$0.00</strong></p>
+                                <p>Descuento del 10 por ciento en compras mayores a 30 dolares <strong id="descuentoVenta">$0.00</strong></p>
+                                <p>Total <strong id="totalVenta">$0.00</strong></p>
+                                <button class="btn btn-red" type="button" onclick="confirmarVenta()">Confirmar venta</button>
+                                <button class="btn btn-actualizar" type="button" onclick="actualizarDatosVendedor()">Actualizar datos</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,6 +115,9 @@
                     <p>Busca facturas previas y revisa los detalles de cada venta.</p>
                     <div class="tarjeta">
                         <h3>Facturas</h3>
+                        <div id="facturasVenta">
+                            <p class="textoVacio">Todavia no hay ventas registradas</p>
+                        </div>
                     </div>
                 </div>
             </section>

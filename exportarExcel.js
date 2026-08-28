@@ -15,7 +15,12 @@ function leerMatrizGuardada(clave, matrizActual) {
 }
 
 // Funcion para descargar todos los datos en hojas separadas
-function descargarInventarioExcel() {
+async function descargarInventarioExcel() {
+    if (typeof ExcelJS === "undefined") {
+        alert("No se pudo cargar la herramienta para guardar Excel. Revisa tu conexion a internet y vuelve a cargar la pagina.");
+        return;
+    }
+
     // Lee los datos mas recientes del inventario
     const inventarioActual = obtenerInventario();
     informacionMatriz.splice(0, informacionMatriz.length, ...inventarioActual);
@@ -24,49 +29,61 @@ function descargarInventarioExcel() {
     const proveedoresActuales = leerMatrizGuardada("proveedoresSistemaVentas", window.informacionMatrizProveedores);
     const ventasActuales = leerMatrizGuardada("ventasSistemaVentas", []);
 
-    // Valida si existe algun dato para crear el archivo
-    if (inventarioActual.length === 0 && clientesActuales.length === 0 && proveedoresActuales.length === 0 && ventasActuales.length === 0) {
-        alert("No hay datos guardados para descargar.");
-        return;
+    try {
+        const libroTrabajo = new ExcelJS.Workbook();
+        const hojaInventario = libroTrabajo.addWorksheet("Inventario");
+        hojaInventario.columns = [
+            { header: "ID", key: "id", width: 16 },
+            { header: "Categoria", key: "categoria", width: 18 },
+            { header: "Imagen", key: "imagen", width: 16 },
+            { header: "Nombre", key: "nombre", width: 24 },
+            { header: "Precio", key: "precio", width: 14 },
+            { header: "Cantidad", key: "cantidad", width: 14 }
+        ];
+
+        for (const fila of inventarioActual) {
+            const filaExcel = hojaInventario.addRow([fila[0], fila[1], "", fila[3], fila[4], fila[5]]);
+            filaExcel.height = 60;
+            if (typeof fila[2] === "string" && fila[2].startsWith("data:")) {
+                const imagenPng = await convertirImagenAPng(fila[2]);
+                if (imagenPng) {
+                    const imagenId = libroTrabajo.addImage({ base64: imagenPng, extension: "png" });
+                    hojaInventario.addImage(imagenId, {
+                        tl: { col: 2, row: filaExcel.number - 1 },
+                        ext: { width: 90, height: 70 }
+                    });
+                }
+            }
+        }
+
+        agregarHojaDatos(libroTrabajo, "Proveedores", [
+            ["Nombre", "Cedula", "Razon social", "Tipo de producto", "Telefono", "Correo", "Numero de cuenta"],
+            ...proveedoresActuales
+        ]);
+        agregarHojaDatos(libroTrabajo, "Clientes", [
+            ["Nombre", "Cedula", "Telefono", "Correo"],
+            ...clientesActuales
+        ]);
+        agregarHojaDatos(libroTrabajo, "Ventas", [
+            ["Numero venta", "Fecha", "Cliente", "Cedula cliente", "ID producto", "Producto", "Cantidad", "Precio unitario", "Subtotal", "Descuento", "Total"],
+            ...ventasActuales
+        ]);
+
+        const contenidoExcel = await libroTrabajo.xlsx.writeBuffer();
+        const archivoExcel = new Blob([contenidoExcel], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        });
+        const enlaceDescarga = document.createElement("a");
+        enlaceDescarga.href = URL.createObjectURL(archivoExcel);
+        enlaceDescarga.download = "sistema_ventas.xlsx";
+        document.body.appendChild(enlaceDescarga);
+        enlaceDescarga.click();
+        enlaceDescarga.remove();
+        setTimeout(() => URL.revokeObjectURL(enlaceDescarga.href), 1000);
+    } catch (error) {
+        console.error("Error al generar el archivo Excel:", error);
+        alert("No se pudo generar el archivo Excel. Revisa la consola para ver el error.");
     }
-
-    // Crea una hoja para cada grupo de datos
-    const hojasExcel = [
-        crearHojaExcel("Inventario", [
-        ["ID", "Categoria", "Imagen", "Nombre", "Precio", "Cantidad"],
-        ...inventarioActual
-        ]),
-        crearHojaExcel("Proveedores", [
-        ["Nombre", "Cedula", "Razon social", "Tipo de producto", "Telefono", "Correo", "Numero de cuenta"],
-        ...proveedoresActuales
-        ]),
-        crearHojaExcel("Clientes", [
-        ["Nombre", "Cedula", "Telefono", "Correo"],
-        ...clientesActuales
-        ]),
-        crearHojaExcel("Ventas", [
-        ["Fecha", "ID producto", "Producto", "Cantidad", "Precio unitario", "Total"],
-        ...ventasActuales
-        ])
-    ].join("");
-
-    // Forma un libro Excel sin usar librerias externas
-    const contenidoExcel = `<?xml version="1.0"?>
-        <?mso-application progid="Excel.Sheet"?>
-        <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
-            xmlns:o="urn:schemas-microsoft-com:office:office"
-            xmlns:x="urn:schemas-microsoft-com:office:excel"
-            xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
-            ${hojasExcel}
-        </Workbook>`;
-    const archivoExcel = new Blob([contenidoExcel], { type: "application/vnd.ms-excel" });
-    const enlaceDescarga = document.createElement("a");
-    enlaceDescarga.href = URL.createObjectURL(archivoExcel);
-    enlaceDescarga.download = "sistema_ventas.xls";
-    document.body.appendChild(enlaceDescarga);
-    enlaceDescarga.click();
-    enlaceDescarga.remove();
-    URL.revokeObjectURL(enlaceDescarga.href);
 }
 
 // Crea una hoja con sus filas y columnas
@@ -92,6 +109,12 @@ function escaparDatoExcel(dato) {
         .replaceAll("'", "&apos;");
 }
 
+// Agrega una hoja con filas normales de datos
+function agregarHojaDatos(libroTrabajo, nombre, datos) {
+    const hojaTrabajo = libroTrabajo.addWorksheet(nombre);
+    datos.forEach(fila => hojaTrabajo.addRow(fila));
+}
+
 // Funcion para actualizar y refrescar la vista visual del inventario
 function actualizarVistaInventario() {
     // Vuelve a cargar el inventario desde el almacenamiento local
@@ -110,4 +133,25 @@ function actualizarVistaInventario() {
 // Abre el selector para subir un Excel que ya fue editado
 function actualizarExcel() {
     document.getElementById("datosExcel").click();
+}
+
+// Convierte la imagen guardada en el sistema a PNG para Excel
+function convertirImagenAPng(dataUrl) {
+    return new Promise(resolve => {
+        const imagen = new Image();
+
+        imagen.onload = function() {
+            const lienzo = document.createElement("canvas");
+            lienzo.width = imagen.width;
+            lienzo.height = imagen.height;
+            lienzo.getContext("2d").drawImage(imagen, 0, 0);
+            resolve(lienzo.toDataURL("image/png"));
+        };
+
+        imagen.onerror = function() {
+            resolve(null);
+        };
+
+        imagen.src = dataUrl;
+    });
 }

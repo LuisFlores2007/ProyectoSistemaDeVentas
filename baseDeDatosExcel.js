@@ -1,5 +1,5 @@
 // Funcion para cargar un archivo Excel de inventario y actualizar la matriz de productos
-function cargarInventarioExcel(evento) {
+async function cargarInventarioExcel(evento) {
     // Obtiene el archivo seleccionado por el usuario en el input de tipo file
     const archivoExcel = evento.target.files[0];
 
@@ -8,30 +8,44 @@ function cargarInventarioExcel(evento) {
         return;
     }
 
-    // Crea un lector de archivos para leer el contenido del Excel
-    if (typeof XLSX === "undefined") {
-        alert("No se pudo cargar la herramienta de Excel. Revisa tu conexion a internet.");
+    if (typeof XLSX === "undefined" || typeof ExcelJS === "undefined") {
+        alert("No se pudieron cargar las herramientas de Excel. Revisa tu conexion a internet y vuelve a cargar la pagina.");
         return;
     }
 
-    const lectorDeArchivos = new FileReader();
+    try {
+        const datosExcel = await archivoExcel.arrayBuffer();
+        let filasDeExcel;
 
-    // Evento que se ejecuta cuando el archivo termina de leerse
-    lectorDeArchivos.onload = function(eventoLectura) {
-        // Obtiene los datos binarios del archivo leido
-        const datosBinarios = eventoLectura.target.result;
+        if (archivoExcel.name.toLowerCase().endsWith(".xlsx")) {
+            const libroTrabajo = new ExcelJS.Workbook();
+            await libroTrabajo.xlsx.load(datosExcel);
+            const hojaTrabajo = libroTrabajo.worksheets[0];
+            const imagenesPorFila = new Map();
 
-        // Lee el libro de trabajo de Excel usando la libreria XLSX
-        const libroTrabajo = XLSX.read(datosBinarios, { type: "binary" });
+            hojaTrabajo.getImages().forEach(imagen => {
+                const rango = imagen.range;
+                const fila = Math.floor(rango.tl.nativeRow ?? rango.tl.row);
+                const imagenExcel = libroTrabajo.getImage(imagen.imageId);
+                const dataUrl = convertirImagenExcelADataUrl(imagenExcel);
+                if (dataUrl) {
+                    imagenesPorFila.set(fila, dataUrl);
+                }
+            });
 
-        // Obtiene el nombre de la primera hoja del archivo Excel
-        const nombrePrimeraHoja = libroTrabajo.SheetNames[0];
-
-        // Obtiene la hoja de trabajo utilizando su nombre
-        const hojaTrabajo = libroTrabajo.Sheets[nombrePrimeraHoja];
-
-        // Convierte los datos de la hoja de Excel en una matriz de filas y columnas (JSON)
-        const filasDeExcel = XLSX.utils.sheet_to_json(hojaTrabajo, { header: 1 });
+            filasDeExcel = [];
+            hojaTrabajo.eachRow({ includeEmpty: true }, (fila, numeroFila) => {
+                const valores = fila.values.slice(1);
+                if (imagenesPorFila.has(numeroFila - 1)) {
+                    valores[2] = imagenesPorFila.get(numeroFila - 1);
+                }
+                filasDeExcel.push(valores);
+            });
+        } else {
+            const libroTrabajo = XLSX.read(datosExcel, { type: "array" });
+            const hojaTrabajo = libroTrabajo.Sheets[libroTrabajo.SheetNames[0]];
+            filasDeExcel = XLSX.utils.sheet_to_json(hojaTrabajo, { header: 1 });
+        }
 
         // Si la hoja esta vacia o no tiene filas, muestra una alerta y termina
         if (filasDeExcel.length === 0) {
@@ -39,7 +53,6 @@ function cargarInventarioExcel(evento) {
             return;
         }
 
-        // Extrae la primera fila como encabezados de las columnas
         const encabezadosOriginales = filasDeExcel.shift();
 
         // Limpia y normaliza los encabezados (quita espacios y mayusculas para evitar errores)
@@ -67,7 +80,6 @@ function cargarInventarioExcel(evento) {
             return;
         }
 
-        // Recorre las filas restantes del Excel y construye la nueva matriz de productos
         const nuevosProductos = [];
         for (let indiceFila = 0; indiceFila < filasDeExcel.length; indiceFila = indiceFila + 1) {
             const filaActual = filasDeExcel[indiceFila];
@@ -100,15 +112,44 @@ function cargarInventarioExcel(evento) {
 
         // Guarda el inventario actualizado en el almacenamiento local (localStorage)
         guardarInventario(informacionMatriz);
+        localStorage.setItem("fechaUltimaCargaExcel", new Date().toLocaleString());
 
         // Actualiza la pantalla para mostrar las tarjetas con los productos nuevos
         mostrarInformacionMatriz();
 
-        // Muestra un mensaje de exito indicando cuantos productos se cargaron
         alert("Inventario actualizado correctamente con " + nuevosProductos.length + " producto(s).");
+        mostrarEstadoCargaExcel();
         evento.target.value = "";
-    };
-
-    // Lee el archivo Excel como una cadena binaria
-    lectorDeArchivos.readAsBinaryString(archivoExcel);
+    } catch (error) {
+        console.error("Error al cargar el archivo Excel:", error);
+        alert("No se pudo cargar el archivo Excel. Verifica que sea un archivo valido.");
+    }
 }
+
+function convertirImagenExcelADataUrl(imagenExcel) {
+    if (imagenExcel.base64) {
+        return imagenExcel.base64;
+    }
+
+    if (!imagenExcel.buffer) {
+        return "";
+    }
+
+    const bytes = new Uint8Array(imagenExcel.buffer);
+    let binario = "";
+    for (let indice = 0; indice < bytes.length; indice = indice + 1) {
+        binario += String.fromCharCode(bytes[indice]);
+    }
+    return "data:image/" + imagenExcel.extension + ";base64," + btoa(binario);
+}
+
+function mostrarEstadoCargaExcel() {
+    const estado = document.getElementById("estadoCargaExcel");
+    const fecha = localStorage.getItem("fechaUltimaCargaExcel");
+
+    if (estado && fecha) {
+        estado.textContent = "Datos guardados el " + fecha;
+    }
+}
+
+mostrarEstadoCargaExcel();

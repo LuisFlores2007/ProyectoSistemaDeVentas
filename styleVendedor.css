@@ -157,6 +157,10 @@ body {
     max-width: 1120px;
 }
 
+.contenidoSeccion[data-seccion="Procesar venta"] {
+    max-width: 1180px;
+}
+
 .contenidoSeccion h2 {
     color: #00a8ff;
     margin-bottom: 10px;
@@ -183,8 +187,28 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 420px;
+    max-height: 560px;
     overflow-y: auto;
+}
+
+.ventaLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(290px, 0.7fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.panelResumen {
+    display: grid;
+    gap: 18px;
+    position: sticky;
+    top: 18px;
+}
+
+.datosVenta label {
+    display: block;
+    color: #dce7ff;
+    margin-bottom: 6px;
 }
 
 .tarjetaInventario {
@@ -412,5 +436,80 @@ form#formularioCliente input::placeholder {
     .tarjetaCliente {
         grid-template-columns: 140px 110px 110px 190px 140px;
         min-width: 730px;
+    }
+
+    .tarjetaInventario {
+        grid-template-columns: 58px minmax(0, 1fr);
+    }
+
+    .imagenInventario {
+        width: 52px;
+        height: 52px;
+    }
+
+    .accionesInventario {
+        grid-column: 1 / -1;
+    }
+}
+
+.selectorVenta {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #2c3e66;
+    background-color: #0a0e17;
+    color: #ffffff;
+}
+
+.resumenVenta {
+    margin-top: 16px;
+}
+
+.resumenVenta > p {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 10px 0;
+    gap: 12px;
+}
+
+.resumenVenta > p strong {
+    white-space: nowrap;
+}
+
+
+.productoCarrito,
+.facturaGuardada {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #2c3e66;
+}
+
+.productoCarrito button {
+    padding: 5px 10px;
+}
+
+.btn-actualizar {
+    width: 100%;
+    margin-top: 8px;
+    background-color: #00a8ff;
+    color: #07111f;
+}
+
+.btn-actualizar:hover {
+    background-color: #6fb1fc;
+}
+
+@media (max-width: 900px) {
+    .ventaLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .panelResumen {
+        position: static;
     }
 }
