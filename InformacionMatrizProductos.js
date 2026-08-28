@@ -1,22 +1,127 @@
 // Conserva los productos registrados mientras la pagina esta abierta
-const informacionMatriz = [];
+const informacionMatriz = obtenerInventario();
 
 // Guarda la posicion del producto que se esta editando
 let indiceProductoEditando = -1;
 
+function analizarCsv(texto) {
+    const filas = [];
+    let fila = [];
+    let valor = "";
+    let dentroDeComillas = false;
+
+    for (let indice = 0; indice < texto.length; indice = indice + 1) {
+        const caracter = texto[indice];
+        const siguienteCaracter = texto[indice + 1];
+
+        if (caracter === '"' && dentroDeComillas && siguienteCaracter === '"') {
+            valor = valor + '"';
+            indice = indice + 1;
+        } else if (caracter === '"') {
+            dentroDeComillas = !dentroDeComillas;
+        } else if (caracter === "," && !dentroDeComillas) {
+            fila.push(valor.trim());
+            valor = "";
+        } else if ((caracter === "\n" || caracter === "\r") && !dentroDeComillas) {
+            if (caracter === "\r" && siguienteCaracter === "\n") {
+                indice = indice + 1;
+            }
+            fila.push(valor.trim());
+            if (fila.some(celda => celda !== "")) {
+                filas.push(fila);
+            }
+            fila = [];
+            valor = "";
+        } else {
+            valor = valor + caracter;
+        }
+    }
+
+    fila.push(valor.trim());
+    if (fila.some(celda => celda !== "")) {
+        filas.push(fila);
+    }
+    return filas;
+}
+
+function normalizarImagenCsv(imagen) {
+    if (!imagen || imagen.startsWith("data:") || imagen.startsWith("http://") || imagen.startsWith("https://")) {
+        return imagen;
+    }
+    return new URL(imagen, window.location.href).href;
+}
+
+function cargarInventarioCsv(evento) {
+    const archivoCsv = evento.target.files[0];
+    if (!archivoCsv) {
+        return;
+    }
+
+    const lector = new FileReader();
+    lector.onload = () => {
+        const filas = analizarCsv(String(lector.result));
+        const encabezados = filas.shift() || [];
+        const encabezadosNormalizados = encabezados.map(encabezado => encabezado
+            .replace(/^\uFEFF/, "")
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replaceAll(" ", ""));
+        const posiciones = {
+            id: encabezadosNormalizados.indexOf("id"),
+            categoria: encabezadosNormalizados.indexOf("categoria"),
+            imagen: encabezadosNormalizados.indexOf("imagen"),
+            nombre: encabezadosNormalizados.indexOf("nombre"),
+            precio: encabezadosNormalizados.indexOf("precio"),
+            cantidad: encabezadosNormalizados.indexOf("cantidad")
+        };
+
+        if (Object.values(posiciones).some(posicion => posicion === -1)) {
+            alert("El CSV debe tener las columnas: ID, Categoria, Imagen, Nombre, Precio y Cantidad.");
+            return;
+        }
+
+        const inventarioCsv = filas.map(fila => [
+            fila[posiciones.id],
+            fila[posiciones.categoria],
+            normalizarImagenCsv(fila[posiciones.imagen]),
+            fila[posiciones.nombre],
+            fila[posiciones.precio],
+            fila[posiciones.cantidad]
+        ]);
+
+        if (inventarioCsv.some(producto => producto.some(valor => valor === ""))) {
+            alert("El CSV contiene productos con campos vacíos.");
+            return;
+        }
+
+        informacionMatriz.splice(0, informacionMatriz.length, ...inventarioCsv);
+        guardarInventario(informacionMatriz);
+        mostrarInformacionMatriz();
+        alert(`Inventario cargado correctamente: ${inventarioCsv.length} producto(s).`);
+    };
+    lector.onerror = () => alert("No se pudo leer el archivo CSV.");
+    lector.readAsText(archivoCsv);
+}
+
 // Lee el formulario y agrega un producto o actualiza uno existente
-function guardarProducto(evento) {
+async function guardarProducto(evento) {
     // Evita que el formulario recargue la pagina
     evento.preventDefault();
 
     // Obtiene la imagen seleccionada por la persona
     const archivoImagen = document.getElementById("idImagenProducto").files[0];
+    let imagenProducto = indiceProductoEditando >= 0 ? informacionMatriz[indiceProductoEditando][2] : "";
+
+    if (archivoImagen) {
+        imagenProducto = await convertirImagenADataUrl(archivoImagen);
+    }
 
     // Reune los datos en el mismo orden que usa la matriz
     const nuevaFila = [
         document.getElementById("idProducto").value,
         document.getElementById("categoriaProducto").value,
-        archivoImagen ? URL.createObjectURL(archivoImagen) : indiceProductoEditando >= 0 ? informacionMatriz[indiceProductoEditando][2] : "",
+        imagenProducto,
         document.getElementById("nombreProducto").value,
         document.getElementById("precioProducto").value,
         document.getElementById("cantidadProducto").value
@@ -33,6 +138,7 @@ function guardarProducto(evento) {
         informacionMatriz.push(nuevaFila);
     }
 
+    guardarInventario(informacionMatriz);
     // Redibuja la matriz y limpia el formulario
     mostrarInformacionMatriz();
     document.getElementById("productos").reset();
@@ -88,6 +194,7 @@ function eliminarProducto(idProducto) {
     const indiceProducto = informacionMatriz.findIndex(fila => fila[0] === idProducto);
     if (indiceProducto !== -1) {
         informacionMatriz.splice(indiceProducto, 1);
+        guardarInventario(informacionMatriz);
         mostrarInformacionMatriz();
     }
 }

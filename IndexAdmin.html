@@ -24,8 +24,8 @@
 
             <!-- Lista de opciones del menú -->
             <nav class="menuNavegacion">
-                <button class="botonOpcion" onclick="mostrarSeccion('Cargar Excel')">
-                    Cargar Excel
+                <button class="botonOpcion" onclick="mostrarSeccion('Cargar CSV')">
+                    Cargar CSV
                 </button>
                 <button class="botonOpcion" onclick="mostrarSeccion('Control de Inventario')">
                     Control de Inventario
@@ -50,13 +50,13 @@
 
             <!-- Zona donde cambia el nombre de la sección -->
             <section class="pantallaTrabajo">
-                <h1 id="tituloPantallaActual">Cargar Excel</h1>
-                <div class="contenidoSeccion active" data-seccion="Cargar Excel">
-                    <h2>Cargar Excel</h2>
+                <h1 id="tituloPantallaActual">Cargar CSV</h1>
+                <div class="contenidoSeccion active" data-seccion="Cargar CSV">
+                    <h2>Cargar CSV</h2>
                     <div class="tarjeta">
-                        <p>Sube el archivo excel con toda la base de datos.</p>
-                        <label for="datosExcel" class="etiquetaArchivo"><b>Cargar Excel:</b></label>
-                        <input type="file" id="datosExcel" accept=".xlsx" class="inputArchivo">
+                        <p>Sube un CSV con las columnas ID, Categoria, Imagen, Nombre, Precio y Cantidad.</p>
+                        <label for="datosExcel" class="etiquetaArchivo"><b>Cargar inventario CSV:</b></label>
+                        <input type="file" id="datosExcel" accept=".csv,text/csv" class="inputArchivo" onchange="cargarInventarioCsv(event)">
                     </div>
                     
                 </div>
@@ -158,6 +158,7 @@
     </div>
 
     <script src="scriptAdmin.js"></script>
+    <script src="inventarioCompartido.js"></script>
     <script src="validacionCorreo.js"></script>
     <script src="validacionCedula.js"></script>
     <script src="validacionNumeroTelefono.js"></script>

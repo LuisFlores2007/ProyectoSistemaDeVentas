@@ -25,7 +25,7 @@ function iniciarSesion() {
         document.getElementById("mensaje").innerHTML =
             "Bienvenido Empleado";
             // Abre la pantalla principal del vendedor
-            window.location.href = "indexVendedor.html";
+            window.location.href = "IndexVendedor.html";
 
     } 
     // Informa que los datos ingresados no coinciden

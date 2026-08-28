@@ -179,6 +179,64 @@ body {
     margin-bottom: 10px;
 }
 
+.contenedorInventario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.tarjetaInventario {
+    display: grid;
+    grid-template-columns: 72px minmax(160px, 1fr) 140px;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    background-color: #121824;
+    border: 1px solid #2c3e66;
+    border-radius: 8px;
+}
+
+.imagenInventario {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.datosInventario {
+    display: grid;
+    gap: 4px;
+}
+
+.datosInventario h4,
+.datosInventario strong {
+    color: #ffffff;
+}
+
+.datosInventario span,
+.datosInventario p,
+.accionesInventario label {
+    color: #dce7ff;
+    font-size: 0.9rem;
+}
+
+.accionesInventario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.accionesInventario input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #2c3e66;
+    border-radius: 6px;
+    background-color: #0a0e17;
+    color: #ffffff;
+}
+
 .tarjeta ul {
     list-style: none;
     display: grid;

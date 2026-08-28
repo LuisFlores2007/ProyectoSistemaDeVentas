@@ -80,6 +80,9 @@
                     <p>Registra ventas rápidas y genera el resumen del pedido.</p>
                     <div class="tarjeta">
                         <h3>Inventario Actual</h3>
+                        <div class="contenedorInventario" id="contenedorInventario">
+                            <p class="textoVacio">No hay productos disponibles en el inventario.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="contenidoSeccion" data-seccion="Consultar Factura">
@@ -96,6 +99,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="inventarioCompartido.js"></script>
     <script src="scriptVendedor.js"></script>
     <script src="validacionCorreo.js"></script>
     <script src="validacionCedula.js"></script>
