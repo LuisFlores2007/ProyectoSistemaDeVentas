@@ -1,5 +1,5 @@
-// Conserva los clientes registrados mientras la pagina esta abierta
-const informacionMatrizClientes = [];
+// Conserva los clientes registrados y recupera los datos guardados
+const informacionMatrizClientes = JSON.parse(localStorage.getItem("clientesSistemaVentas") || "[]");
 
 // Guarda la posicion del cliente que se esta editando
 let indiceClienteEditando = -1;
@@ -28,6 +28,7 @@ function guardarCliente(evento) {
 	}
 
 	// Redibuja la matriz y limpia el formulario
+	localStorage.setItem("clientesSistemaVentas", JSON.stringify(informacionMatrizClientes));
 	mostrarInformacionMatrizClientes();
 	document.getElementById("formularioCliente").reset();
 }
@@ -69,6 +70,7 @@ function mostrarInformacionMatrizClientes() {
 // Elimina un cliente por su posicion y actualiza la matriz
 function eliminarCliente(indiceCliente) {
 	informacionMatrizClientes.splice(indiceCliente, 1);
+	localStorage.setItem("clientesSistemaVentas", JSON.stringify(informacionMatrizClientes));
 	mostrarInformacionMatrizClientes();
 }
 

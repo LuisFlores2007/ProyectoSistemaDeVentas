@@ -1,5 +1,26 @@
 const CLAVE_INVENTARIO = "inventarioSistemaVentas";
 const PREFIJO_INVENTARIO_VENTANA = "sistemaVentasInventario:";
+const CLAVE_LIMPIEZA_INICIAL = "sistemaVentasLimpiezaInicial";
+
+// Quita datos viejos de prueba solo la primera vez
+function limpiarDatosIniciales() {
+    if (localStorage.getItem(CLAVE_LIMPIEZA_INICIAL)) {
+        return;
+    }
+
+    localStorage.removeItem(CLAVE_INVENTARIO);
+    localStorage.removeItem("clientesSistemaVentas");
+    localStorage.removeItem("proveedoresSistemaVentas");
+    localStorage.removeItem("ventasSistemaVentas");
+
+    if (window.name.startsWith(PREFIJO_INVENTARIO_VENTANA)) {
+        window.name = "";
+    }
+
+    localStorage.setItem(CLAVE_LIMPIEZA_INICIAL, "si");
+}
+
+limpiarDatosIniciales();
 
 function obtenerInventario() {
     const inventarioGuardado = localStorage.getItem(CLAVE_INVENTARIO)

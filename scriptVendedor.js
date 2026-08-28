@@ -73,6 +73,19 @@ function venderProducto(indiceProducto) {
         return;
     }
 
+    // Guarda la venta antes de actualizar el stock
+    const ventasGuardadas = JSON.parse(localStorage.getItem("ventasSistemaVentas") || "[]");
+    const precioProducto = Number(producto[4]) || 0;
+    ventasGuardadas.push([
+        new Date().toISOString(),
+        producto[0],
+        producto[3],
+        cantidad,
+        precioProducto,
+        cantidad * precioProducto
+    ]);
+    localStorage.setItem("ventasSistemaVentas", JSON.stringify(ventasGuardadas));
+
     producto[5] = stock - cantidad;
     guardarInventario(inventario);
     mostrarInventarioVendedor();

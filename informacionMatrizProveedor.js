@@ -1,5 +1,5 @@
-// Conserva los proveedores registrados mientras la pagina esta abierta
-const informacionMatrizProveedores = [];
+// Conserva los proveedores registrados y recupera los datos guardados
+const informacionMatrizProveedores = JSON.parse(localStorage.getItem("proveedoresSistemaVentas") || "[]");
 
 // Guarda la posicion del proveedor que se esta editando
 let indiceProveedorEditando = -1;
@@ -31,6 +31,7 @@ function guardarProveedor(evento) {
 	}
 
 	// Redibuja la matriz y limpia el formulario
+	localStorage.setItem("proveedoresSistemaVentas", JSON.stringify(informacionMatrizProveedores));
 	mostrarInformacionMatrizProveedores();
 	document.getElementById("proveedor").reset();
 }
@@ -78,6 +79,7 @@ function mostrarInformacionMatrizProveedores() {
 // Elimina un proveedor por su posicion y actualiza la matriz
 function eliminarProveedor(indiceProveedor) {
 	informacionMatrizProveedores.splice(indiceProveedor, 1);
+	localStorage.setItem("proveedoresSistemaVentas", JSON.stringify(informacionMatrizProveedores));
 	mostrarInformacionMatrizProveedores();
 }
 
