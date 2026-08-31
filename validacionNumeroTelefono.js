@@ -1,5 +1,26 @@
-// Obtiene el telefono escrito y muestra si cumple el formato esperado
+function soloNumeros(input, permitirDecimales = false, maxLongitud = null) {
+    if (!input) return;
 
+    let valor = input.value;
+
+    if (permitirDecimales) {
+        valor = valor.replace(/[^0-9.]/g, "");
+        let partes = valor.split(".");
+        if (partes.length > 2) {
+            valor = partes.shift() + "." + partes.join("");
+        }
+    } else {
+        valor = valor.replace(/\D/g, "");
+    }
+
+    if (maxLongitud !== null && valor.length > maxLongitud) {
+        valor = valor.slice(0, maxLongitud);
+    }
+
+    input.value = valor;
+}
+
+// Obtiene el telefono escrito y muestra si cumple el formato esperado
 function numeroCelular() {
     // Lee el valor actual del campo de telefono
     let numeroTelf = document.getElementById("telefono").value;
