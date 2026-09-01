@@ -205,6 +205,69 @@ body {
     margin-bottom: 10px;
 }
 
+.tarjetaGrafica {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.formularioGrafica {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 14px;
+}
+
+.formularioGrafica label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #dce7ff;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.formularioGrafica input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #2c3e66;
+    background-color: #0a0e17;
+    color: #ffffff;
+}
+
+.formularioGrafica input:focus {
+    outline: none;
+    border-color: #00a8ff;
+    box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.15);
+}
+
+.accionesGrafica {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.graficaContenedor {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    background-color: rgba(10, 14, 23, 0.7);
+    border: 1px solid #2c3e66;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+#grafica {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.resultadoGrafica {
+    margin: 0;
+    color: #dce7ff;
+    line-height: 1.6;
+    font-size: 0.96rem;
+}
+
 .etiquetaArchivo {
     display: block;
     color: #00a8ff;
@@ -437,6 +500,14 @@ form#proveedor input::placeholder {
 }
 
 @media (max-width: 700px) {
+    .formularioGrafica {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .graficaContenedor {
+        height: 260px;
+    }
+
     .contenidoSeccion[data-seccion="Registrar Proveedor"] {
         padding: 18px;
     }

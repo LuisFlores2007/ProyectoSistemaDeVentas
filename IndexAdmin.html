@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styleAdmin.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -156,8 +157,37 @@
                 <div class="contenidoSeccion" data-seccion="Consultar Grafica">
                     <h2>Consultar Gráfica</h2>
                     <p>Observa ventas, stock y tendencias con un resumen visual del negocio.</p>
-                    <div class="tarjeta">
-                        <h3>Aqui va la grafica en python</h3>
+                    <div class="tarjeta tarjetaGrafica">
+                        <div class="formularioGrafica">
+                            <label>
+                                Mes 1
+                                <input type="number" id="mes1" value="1200" min="0">
+                            </label>
+                            <label>
+                                Mes 2
+                                <input type="number" id="mes2" value="1500" min="0">
+                            </label>
+                            <label>
+                                Mes 3
+                                <input type="number" id="mes3" value="1800" min="0">
+                            </label>
+                            <label>
+                                Mes a predecir
+                                <input type="number" id="mesPrediccion" value="4" min="1">
+                            </label>
+                        </div>
+
+                        <div class="accionesGrafica">
+                            <button type="button" class="btn btn-red" onclick="predecir()">Actualizar gráfica</button>
+                        </div>
+
+                        <div class="graficaContenedor">
+                            <canvas id="grafica" aria-label="Gráfica de ganancias"></canvas>
+                        </div>
+
+                        <p id="resultado" class="resultadoGrafica">
+                            Ganancia estimada: $0.00
+                        </p>
                     </div>
                 </div>
             </section>
@@ -167,6 +197,7 @@
     </div>
 
     <script src="scriptAdmin.js"></script>
+    <script src="grafica.js"></script>
     <script src="inventarioCompartido.js"></script>
     <script src="validacionCorreo.js"></script>
     <script src="validacionCedula.js"></script>
