@@ -117,14 +117,22 @@ async function guardarProducto(evento) {
         imagenProducto = await convertirImagenADataUrl(archivoImagen);
     }
 
+    const precioProductoValor = document.getElementById("precioProducto").value.replace(/[^0-9.]/g, "");
+    const cantidadProductoValor = document.getElementById("cantidadProducto").value.replace(/\D/g, "");
+
+    if (precioProductoValor === "" || cantidadProductoValor === "") {
+        alert("El precio y el stock deben ser valores numéricos válidos.");
+        return;
+    }
+
     // Reune los datos en el mismo orden que usa la matriz
     const nuevaFila = [
         document.getElementById("idProducto").value,
         document.getElementById("categoriaProducto").value,
         imagenProducto,
         document.getElementById("nombreProducto").value,
-        document.getElementById("precioProducto").value,
-        document.getElementById("cantidadProducto").value
+        Number(precioProductoValor),
+        Number(cantidadProductoValor)
     ];
 
     // Reemplaza la fila cuando se esta editando un producto

@@ -9,15 +9,24 @@ function guardarProveedor(evento) {
 	// Evita que el formulario recargue la pagina
 	evento.preventDefault();
 
+	const cedulaValor = document.getElementById("cedula").value.replace(/\D/g, "");
+	const telefonoValor = document.getElementById("telefono").value.replace(/\D/g, "");
+	const numeroCuentaValor = document.getElementById("numeroCuenta").value.replace(/\D/g, "");
+
+	if (cedulaValor === "" || telefonoValor === "" || numeroCuentaValor === "") {
+		alert("La cédula, el teléfono y el número de cuenta deben contener solo números.");
+		return;
+	}
+
 	// Reune los datos en el mismo orden que usa la matriz
 	const nuevaFila = [
 		document.getElementById("nombreProveedor").value,
-		document.getElementById("cedula").value,
+		cedulaValor,
 		document.getElementById("razonSocial").value,
 		document.getElementById("tipoProductoProveedor").value,
-		document.getElementById("telefono").value,
+		telefonoValor,
 		document.getElementById("Iemail").value,
-		document.getElementById("numeroCuenta").value
+		numeroCuentaValor
 	];
 
 	// Reemplaza la fila cuando se esta editando un proveedor

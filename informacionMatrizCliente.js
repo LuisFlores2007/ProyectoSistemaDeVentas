@@ -9,11 +9,19 @@ function guardarCliente(evento) {
 	// Evita que el formulario recargue la pagina
 	evento.preventDefault();
 
+	const cedulaValor = document.getElementById("cedula").value.replace(/\D/g, "");
+	const telefonoValor = document.getElementById("telefono").value.replace(/\D/g, "");
+
+	if (cedulaValor === "" || telefonoValor === "") {
+		alert("La cédula y el teléfono deben contener solo números.");
+		return;
+	}
+
 	// Reune los datos en el mismo orden que usa la matriz
 	const nuevaFila = [
 		document.getElementById("nombreProveedor").value,
-		document.getElementById("cedula").value,
-		document.getElementById("telefono").value,
+		cedulaValor,
+		telefonoValor,
 		document.getElementById("Iemail").value
 	];
 
