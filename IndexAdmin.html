@@ -57,14 +57,13 @@
                 <div class="contenidoSeccion active" data-seccion="Cargar Excel">
                     <h2>Cargar Excel</h2>
                     <div class="tarjeta">
-                        <p>Sube un Excel con las columnas ID, Categoria, Imagen, Nombre, Precio y Cantidad.</p>
+                        <p>Sube un Excel.</p>
                         <label for="datosExcel" class="etiquetaArchivo"><b>Cargar inventario Excel:</b></label>
                         <input type="file" id="datosExcel" accept=".xlsx,.xls" class="inputArchivo" onchange="cargarInventarioExcel(event)">
                         <p id="estadoCargaExcel" class="estadoCargaExcel">Todavia no se ha cargado ningun Excel</p>
                         <div>
                             <button id="botonExportar" type="button" class="btn btn-red" onclick="descargarInventarioExcel()">Descargar todos los datos</button>
-                            <!--boton para actualizar el excel -->
-                            <button id="botonActualizar" type="button" class="btn btn-red" onclick="actualizarExcel()">Actualizar Excel</button>
+                            <button id="botonActualizar" type="button" class="btn btn-red" onclick="actualizarExcel()">Actualizar datos</button>
                         </div>
                     </div>
                     
@@ -160,25 +159,21 @@
                     <div class="tarjeta tarjetaGrafica">
                         <div class="formularioGrafica">
                             <label>
-                                Mes 1
-                                <input type="number" id="mes1" value="1200" min="0">
+                                Lunes
+                                <input type="number" id="lunes"  min="0" step="0.01">
                             </label>
                             <label>
-                                Mes 2
-                                <input type="number" id="mes2" value="1500" min="0">
+                                Miércoles
+                                <input type="number" id="miercoles"  min="0" step="0.01">
                             </label>
                             <label>
-                                Mes 3
-                                <input type="number" id="mes3" value="1800" min="0">
-                            </label>
-                            <label>
-                                Mes a predecir
-                                <input type="number" id="mesPrediccion" value="4" min="1">
+                                Sábado
+                                <input type="number" id="sabado"  min="0" step="0.01">
                             </label>
                         </div>
 
                         <div class="accionesGrafica">
-                            <button type="button" class="btn btn-red" onclick="predecir()">Actualizar gráfica</button>
+                            <button type="button" class="btn btn-red" onclick="actualizarGrafica()">Actualizar gráfica</button>
                         </div>
 
                         <div class="graficaContenedor">
@@ -186,7 +181,7 @@
                         </div>
 
                         <p id="resultado" class="resultadoGrafica">
-                            Ganancia estimada: $0.00
+                            Ganancia semanal: $0.00
                         </p>
                     </div>
                 </div>

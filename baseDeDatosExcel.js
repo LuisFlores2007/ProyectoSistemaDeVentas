@@ -112,6 +112,7 @@ async function cargarInventarioExcel(evento) {
 
         // Guarda el inventario actualizado en el almacenamiento local (localStorage)
         guardarInventario(informacionMatriz);
+        localStorage.setItem("nombreUltimoExcel", archivoExcel.name);
         localStorage.setItem("fechaUltimaCargaExcel", new Date().toLocaleString());
 
         // Actualiza la pantalla para mostrar las tarjetas con los productos nuevos
@@ -146,9 +147,10 @@ function convertirImagenExcelADataUrl(imagenExcel) {
 function mostrarEstadoCargaExcel() {
     const estado = document.getElementById("estadoCargaExcel");
     const fecha = localStorage.getItem("fechaUltimaCargaExcel");
+    const nombre = localStorage.getItem("nombreUltimoExcel");
 
     if (estado && fecha) {
-        estado.textContent = "Datos guardados el " + fecha;
+        estado.textContent = "Archivo " + nombre + " cargado el " + fecha;
     }
 }
 

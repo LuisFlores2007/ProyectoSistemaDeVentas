@@ -1,56 +1,115 @@
-// Funcion para calcular la prediccion
+let graficaGanancias;
 
-function predecir() {
+function actualizarGrafica() {
 
-    // Obtener las ganancias
+    const diasSemana = [
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+        "Domingo"
+    ];
 
-    let mes1 = Number(document.getElementById("mes1").value)
-    let mes2 = Number(document.getElementById("mes2").value)
-    let mes3 = Number(document.getElementById("mes3").value)
+    const gananciaLunes =
+        Number(document.getElementById("lunes").value) || 0;
 
-    // Obtener el mes que se quiere predecir
+    const gananciaMiercoles =
+        Number(document.getElementById("miercoles").value) || 0;
 
-    let mes = Number(document.getElementById("mesPrediccion").value)
+    const gananciaSabado =
+        Number(document.getElementById("sabado").value) || 0;
 
-    // Calcular la pendiente
 
-    let m = (mes3 - mes1) / 2
+    // ECUACION 1 lunes a miércoles
+    // y = mx + b
 
-    // Calcular el valor inicial
+    const pendiente1 =
+        (gananciaMiercoles - gananciaLunes) / (3 - 1);
 
-    let b = mes1 - m
+    const interseccion1 =
+        gananciaLunes - pendiente1 * 1;
 
-    // Calcular la ganancia
 
-    let resultado = m * mes + b
+    // ECUACION 2 miércoles a sábado
+    // y = mx + b
 
-    // Mostrar resultado
+    const pendiente2 =
+        (gananciaSabado - gananciaMiercoles) / (6 - 3);
+
+    const interseccion2 =
+        gananciaMiercoles - pendiente2 * 3;
+
+
+    // Aplicamos y = mx + b
+    const gananciasSemanales = [
+
+        pendiente1 * 1 + interseccion1, // Lunes
+        pendiente1 * 2 + interseccion1, // Martes
+        pendiente1 * 3 + interseccion1, // Miércoles
+
+        pendiente2 * 4 + interseccion2, // Jueves
+        pendiente2 * 5 + interseccion2, // Viernes
+        pendiente2 * 6 + interseccion2, // Sábado
+        pendiente2 * 7 + interseccion2  // Domingo
+    ];
+
+
+    const gananciaTotal = gananciasSemanales.reduce(
+        (suma, ganancia) => suma + ganancia,
+        0
+    );
+
 
     document.getElementById("resultado").textContent =
-        "Ganancia estimada: $" + resultado.toFixed(2)
+        `Ganancia semanal: $${gananciaTotal.toFixed(2)}`;
 
-    // Crear la grafica
 
-    new Chart(document.getElementById("grafica"), {
+    if (graficaGanancias) {
+        graficaGanancias.destroy();
+    }
 
-        type: "line",
 
-        data: {
+    graficaGanancias = new Chart(
+        document.getElementById("grafica"),
+        {
+            type: "line",
 
-            labels: ["Mes 1", "Mes 2", "Mes 3", "Prediccion"],
+            data: {
+                labels: diasSemana,
 
-            datasets: [{
+                datasets: [{
+                    label: "Ganancia diaria",
+                    data: gananciasSemanales,
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 5
+                }]
+            },
 
-                label: "Ganancias",
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
 
-                data: [mes1, mes2, mes3, resultado],
+                scales: {
+                    y: {
+                        beginAtZero: true,
 
-                borderWidth: 2
+                        suggestedMax:
+                            Math.max(...gananciasSemanales) + 20,
 
-            }]
-
+                        ticks: {
+                            callback: valor => "$" + valor
+                        }
+                    }
+                }
+            }
         }
+    );
+}
 
-    })
 
+function predecir() {
+    actualizarGrafica();
 }

@@ -130,9 +130,13 @@ function actualizarVistaInventario() {
     alert("Vista de inventario actualizada correctamente.");
 }
 
-// Abre el selector para subir un Excel que ya fue editado
+// Actualiza la pantalla con el inventario guardado
 function actualizarExcel() {
-    document.getElementById("datosExcel").click();
+    const inventarioGuardado = obtenerInventario();
+    informacionMatriz.splice(0, informacionMatriz.length, ...inventarioGuardado);
+    mostrarInformacionMatriz();
+    mostrarEstadoCargaExcel();
+    alert("Datos actualizados desde localStorage");
 }
 
 // Convierte la imagen guardada en el sistema a PNG para Excel
